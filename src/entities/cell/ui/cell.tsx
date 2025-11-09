@@ -1,22 +1,25 @@
 import { StyleSheet, TouchableOpacity } from "react-native"
 import { getCellColor } from "../lib/get-cell-color"
-import { IChessBoardElement } from "../../../shared/models/interfaces";
+import { IChessBoardElement, IChessPieceMovement } from "../../../shared/models/interfaces";
 import { Piece } from "../../figure/ui/piece";
 
 interface CellProps {
     rowIndex: number;
     colIndex: number;
     element: IChessBoardElement;
-    handleClick: (rowIndex: number, colIndex: number) => void;
+    highlightedElements: IChessPieceMovement[];
+    handleClick: (rowIndex: number, colIndex: number, element: IChessBoardElement) => void;
 }
 
-export function Cell({ rowIndex, colIndex, element, handleClick }: CellProps) {
+export function Cell({ rowIndex, colIndex, element, highlightedElements, handleClick }: CellProps) {
     const color = getCellColor(rowIndex, colIndex);
+
+    const isHighlighted = highlightedElements.some((move: IChessPieceMovement) => move.row === rowIndex && move.col === colIndex);
 
     return (
         <TouchableOpacity 
-            style={[styles.cell, { backgroundColor: color }]}
-            onPress={() => handleClick(rowIndex, colIndex)}
+            style={[styles.cell, { backgroundColor: color }, isHighlighted && styles.highlighted]}
+            onPress={() => handleClick(rowIndex, colIndex, element)}
             activeOpacity={0.7}
         >
             <Piece value={element.value} row={rowIndex} col={colIndex} />
@@ -32,4 +35,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'black',
     },
+
+    highlighted: {
+        backgroundColor: 'red',
+    }
 })

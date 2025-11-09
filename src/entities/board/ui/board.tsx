@@ -1,19 +1,21 @@
 import { View, StyleSheet } from "react-native";
 import { Cell } from "../../cell/index";
-import { IChessBoardElement } from "../../../shared/models/interfaces";
+import { IChessBoardElement, IChessPieceMovement } from "../../../shared/models/interfaces";
 
 interface BoardProps {
     elements: IChessBoardElement[][];
-    handleClick: (rowIndex: number, colIndex: number) => void;
+    highlightedElements: IChessPieceMovement[];
+    handleClick: (rowIndex: number, colIndex: number, element: IChessBoardElement) => void;
 }
 
-export function Board ({ elements, handleClick }: BoardProps) {
+export function Board ({ elements, highlightedElements, handleClick }: BoardProps) {
     return (
         <View style={styles.board}>
             {elements.map((row: IChessBoardElement[], rowIndex: number) => (
                 <View key={rowIndex} style={styles.row}>
                     {row.map((element: IChessBoardElement, colIndex: number) => (
                         <Cell
+                        highlightedElements={highlightedElements}
                          key={element.id}
                          rowIndex={rowIndex}
                          colIndex={colIndex}
