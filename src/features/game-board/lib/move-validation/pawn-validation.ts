@@ -1,4 +1,5 @@
 import { ChessPieceTeam, IChessBoardElement, IChessPieceMovement } from "../../../../shared/models/interfaces";
+import { getCoordinatesFromId } from "../../../../shared/utils/get-coordinates-from-id";
 
 export function pawnValidation(possibleMoves: IChessPieceMovement[], selectedElement: IChessBoardElement, elements: IChessBoardElement[][]): IChessPieceMovement[] {
     if (possibleMoves.length === 0) {
@@ -10,8 +11,7 @@ export function pawnValidation(possibleMoves: IChessPieceMovement[], selectedEle
     for (const move of possibleMoves) {
         const element = elements[move.row][move.col];
 
-        const selectedElementRow = parseInt(selectedElement.id.split('-')[0]);
-        const selectedElementCol = parseInt(selectedElement.id.split('-')[1]);
+        const { row: selectedElementRow, col: selectedElementCol } = getCoordinatesFromId(selectedElement.id);
 
         if (element.value && element.value?.team !== selectedElement.value?.team) { // diagonal capture
         

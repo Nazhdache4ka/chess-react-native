@@ -1,13 +1,13 @@
 import { ChessPieceTeam, IChessBoardElement, IChessPieceMovement } from "../../../../shared/models/interfaces";
 import { MAX_ROW, MAX_COL, MIN_ROW, MIN_COL } from "../../../../shared/models/model";
+import { getCoordinatesFromId } from "../../../../shared/utils/get-coordinates-from-id";
 
 export function getPawnMoves (element: IChessBoardElement): IChessPieceMovement[] {
     if (!element.value) {
         return [];
     }
 
-    const row = parseInt(element.id.split('-')[0]);
-    const col = parseInt(element.id.split('-')[1]);
+    const { row, col } = getCoordinatesFromId(element.id);
 
     const moves: IChessPieceMovement[] = [];
 
