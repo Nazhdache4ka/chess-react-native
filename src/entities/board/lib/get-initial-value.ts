@@ -1,4 +1,4 @@
-import { IChessBoardElement } from "../../../shared/models/interfaces"
+import { IChessBoardElement } from "@/shared/types/"
 import { BOARD_ROWS, BOARD_COLS } from "../model"
 
 export function getInitialElements(): IChessBoardElement[][] {

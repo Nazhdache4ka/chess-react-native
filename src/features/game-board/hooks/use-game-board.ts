@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { getInitialElements } from "../../../entities/board/lib/get-initial-value";
-import { fillChessBoard } from "../../../entities/board/lib/fill-chess-board";
-import { ChessPieceTeam, IChessBoardElement } from "../../../shared/models/interfaces";
+import { getInitialElements } from "@/entities/board/";
+import { fillChessBoard } from "@/entities/board/";
+import { ChessPieceTeam, IChessBoardElement } from "@/shared/types/";
 import { useChessClickHandler } from "./use-chess-click-handler";
 
 export function useGameBoard() {

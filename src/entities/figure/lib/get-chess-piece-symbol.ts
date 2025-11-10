@@ -1,5 +1,5 @@
-import { ChessPieceTeam, IChessPiece } from "../../../shared/models/interfaces";
-import { BLACK_PIECES, WHITE_PIECES } from "../models/piece-symbols";
+import { ChessPieceTeam, IChessPiece } from "@/shared/types/";
+import { BLACK_PIECES, WHITE_PIECES } from "../models/";
 
 export function getChessPieceSymbol(value: IChessPiece | null): string {
     if (!value) {

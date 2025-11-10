@@ -1,6 +1,6 @@
-import { ChessPieceTeam, IChessBoardElement, IChessPieceMovement } from "../../../../shared/models/interfaces";
-import { MAX_ROW, MAX_COL, MIN_ROW, MIN_COL } from "../../../../shared/models/model";
-import { getCoordinatesFromId } from "../../../../shared/utils/get-coordinates-from-id";
+import { ChessPieceTeam, IChessBoardElement, IChessPieceMovement } from "@/shared/types/";
+import { MAX_ROW, MAX_COL, MIN_ROW, MIN_COL } from "@/shared/models/";
+import { getCoordinatesFromId } from "@/shared/utils/";
 
 export function getPawnMoves (element: IChessBoardElement): IChessPieceMovement[] {
     if (!element.value) {

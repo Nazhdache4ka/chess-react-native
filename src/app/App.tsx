@@ -1,5 +1,5 @@
 import { StyleSheet, KeyboardAvoidingView } from 'react-native';
-import { GameBoard } from '../features/game-board/index';
+import { GameBoard } from '@/features/game-board/index';
 
 export default function App() {
   return (

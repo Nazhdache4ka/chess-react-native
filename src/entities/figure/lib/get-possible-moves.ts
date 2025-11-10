@@ -1,5 +1,5 @@
-import { ChessPieceType, IChessBoardElement, IChessPieceMovement } from "../../../shared/models/interfaces";
-import { getPawnMoves } from "./pieces-possible-moves/get-pawn-moves";
+import { ChessPieceType, IChessBoardElement, IChessPieceMovement } from "@/shared/types/";
+import { getPawnMoves } from "./pieces-possible-moves/";
 
 export function getPossibleMoves (element: IChessBoardElement): IChessPieceMovement[] {
     if (!element.value) {

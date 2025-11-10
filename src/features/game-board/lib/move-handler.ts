@@ -1,4 +1,4 @@
-import { IChessBoardElement } from "../../../shared/models/interfaces";
+import { IChessBoardElement } from "@/shared/types/";
 
 export function moveHandler(selectedElement: IChessBoardElement | null, rowIndex: number, colIndex: number, elements: IChessBoardElement[][], setElements: React.Dispatch<React.SetStateAction<IChessBoardElement[][]>>) {
     if (selectedElement === null) {

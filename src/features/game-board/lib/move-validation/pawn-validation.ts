@@ -1,5 +1,5 @@
-import { ChessPieceTeam, IChessBoardElement, IChessPieceMovement } from "../../../../shared/models/interfaces";
-import { getCoordinatesFromId } from "../../../../shared/utils/get-coordinates-from-id";
+import { ChessPieceTeam, IChessBoardElement, IChessPieceMovement } from "@/shared/types/";
+import { getCoordinatesFromId } from "@/shared/utils/";
 
 export function pawnValidation(possibleMoves: IChessPieceMovement[], selectedElement: IChessBoardElement, elements: IChessBoardElement[][]): IChessPieceMovement[] {
     if (possibleMoves.length === 0) {

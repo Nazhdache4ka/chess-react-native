@@ -1,5 +1,5 @@
-import { Board } from "../../../entities/board/index"
-import { useGameBoard } from "../lib/use-game-board";
+import { Board } from "@/entities/board/"
+import { useGameBoard } from "../hooks/";
 
 export function GameBoard() {
     const {

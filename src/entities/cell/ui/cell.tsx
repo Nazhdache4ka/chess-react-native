@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity } from "react-native"
-import { getCellColor } from "../lib/get-cell-color"
-import { IChessBoardElement, IChessPieceMovement } from "../../../shared/models/interfaces";
-import { Piece } from "../../figure/ui/piece";
+import { getCellColor } from "../lib/"
+import { IChessBoardElement, IChessPieceMovement } from "@/shared/types/";
+import { Piece } from "@/entities/figure/";
 
 interface CellProps {
     rowIndex: number;

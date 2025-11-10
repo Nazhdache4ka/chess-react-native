@@ -1,1 +1,3 @@
-export * from './ui/piece';
+export * from './lib/';
+export * from './models/';
+export * from './ui/';

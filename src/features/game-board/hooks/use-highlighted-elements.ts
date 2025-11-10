@@ -1,6 +1,6 @@
-import { getPossibleMoves } from "../../../entities/figure/lib/get-possible-moves";
-import { validateMove } from "./validate-move";
-import { IChessBoardElement } from "../../../shared/models/interfaces";
+import { getPossibleMoves } from "@/entities/figure/";
+import { validateMove } from "../lib/";
+import { IChessBoardElement } from "@/shared/types/";
 
 export function useHighlightedElements(selectedElement: IChessBoardElement | null, elements: IChessBoardElement[][]) {
     if (selectedElement === null) {

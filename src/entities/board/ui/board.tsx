@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
-import { Cell } from "../../cell/index";
-import { IChessBoardElement, IChessPieceMovement } from "../../../shared/models/interfaces";
+import { Cell } from "@/entities/cell/";
+import { IChessBoardElement, IChessPieceMovement } from "@/shared/types/";
 
 interface BoardProps {
     elements: IChessBoardElement[][];

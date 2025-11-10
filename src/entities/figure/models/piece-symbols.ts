@@ -1,4 +1,4 @@
-import { ChessPieceType } from "../../../shared/models/interfaces"
+import { ChessPieceType } from "@/shared/types/"
 
 export const WHITE_PIECES = {
     [ChessPieceType.KING]: '♔',

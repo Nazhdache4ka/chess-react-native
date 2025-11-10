@@ -1,5 +1,5 @@
-import { ChessPieceType, IChessBoardElement, IChessPieceMovement } from "../../../shared/models/interfaces";
-import { pawnValidation } from "./move-validation/pawn-validation";
+import { ChessPieceType, IChessBoardElement, IChessPieceMovement } from "@/shared/types/";
+import { pawnValidation } from "./move-validation/";
 
 export function validateMove(possibleMoves: IChessPieceMovement[], selectedElement: IChessBoardElement, elements: IChessBoardElement[][]): IChessPieceMovement[] {
     if (possibleMoves.length === 0) {

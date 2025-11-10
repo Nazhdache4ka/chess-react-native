@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { ChessPieceTeam, IChessBoardElement, IChessPieceMovement } from "../../../shared/models/interfaces";
+import { useState, Dispatch, SetStateAction } from "react";
+import { ChessPieceTeam, IChessBoardElement, IChessPieceMovement } from "@/shared/types/";
 import { useHighlightedElements } from "./use-highlighted-elements";
-import { moveHandler } from "./move-handler";
+import { moveHandler } from "../lib/";
 
-export function useChessClickHandler(elements: IChessBoardElement[][], currentPlayer: ChessPieceTeam, setElements: React.Dispatch<React.SetStateAction<IChessBoardElement[][]>>, setCurrentPlayer: React.Dispatch<React.SetStateAction<ChessPieceTeam>>) {
+export function useChessClickHandler(elements: IChessBoardElement[][], currentPlayer: ChessPieceTeam, setElements: Dispatch<SetStateAction<IChessBoardElement[][]>>, setCurrentPlayer: Dispatch<SetStateAction<ChessPieceTeam>>) {
     const [selectedElement, setSelectedElement] = useState<IChessBoardElement | null>(null);
     const highlightedElements = useHighlightedElements(selectedElement, elements);
 
@@ -19,7 +19,7 @@ export function useChessClickHandler(elements: IChessBoardElement[][], currentPl
 
             if (isHighlightedCell) {
                 moveHandler(selectedElement, rowIndex, colIndex, elements, setElements);
-                setCurrentPlayer(currentPlayer === ChessPieceTeam.WHITE ? ChessPieceTeam.BLACK : ChessPieceTeam.WHITE);
+                setCurrentPlayer((prevPlayer) => prevPlayer === ChessPieceTeam.WHITE ? ChessPieceTeam.BLACK : ChessPieceTeam.WHITE);
                 setSelectedElement(null);
             } else {
                 if (element.value?.team === currentPlayer) {
