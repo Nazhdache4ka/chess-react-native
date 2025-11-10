@@ -15,33 +15,34 @@ export function pawnValidation(possibleMoves: IChessPieceMovement[], selectedEle
 
         if (element.value && element.value?.team !== selectedElement.value?.team) { // diagonal capture
         
-            if (selectedElement.value?.team === ChessPieceTeam.WHITE) {
-                if (move.col !== selectedElementCol) {
-                    highlightedElements.push(move);
-                }
-            }
-
-            if (selectedElement.value?.team === ChessPieceTeam.BLACK) {
-                if (move.col !== selectedElementCol) {
-                    highlightedElements.push(move);
-                }
-            }
-        }
-
-        if (selectedElement.value?.team === ChessPieceTeam.WHITE) { // white pawn double forward move 
-            if (move.row === selectedElementRow - 2 && elements[selectedElementRow - 1][selectedElementCol]?.value === null) {
+            if (move.col !== selectedElementCol) {
                 highlightedElements.push(move);
             }
         }
 
-        if (selectedElement.value?.team === ChessPieceTeam.BLACK) { // black pawn double forward move 
-            if (move.row === selectedElementRow + 2 && elements[selectedElementRow + 1][selectedElementCol]?.value === null) {
+        if (move.col === selectedElementCol) {
+
+            const startRow = Math.min(selectedElementRow, move.row);
+            const endRow = Math.max(selectedElementRow, move.row);
+
+            if (element.value !== null) {
+                continue;
+            }
+
+            let isPathClear = true;
+
+            for (let j = startRow + 1; j <= endRow - 1; j++) {
+
+                if (elements[j][selectedElementCol].value) {
+                    isPathClear = false;
+                    break;
+                }
+             
+            }
+
+            if (isPathClear) {
                 highlightedElements.push(move);
             }
-        }
-
-        if (element.value === null && move.col === selectedElementCol) { // forward move
-            highlightedElements.push(move);
         }
     }
 
