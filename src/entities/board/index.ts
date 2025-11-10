@@ -1,1 +1,2 @@
-export * from './ui/board';
+export * from './ui/';
+export * from './lib/';

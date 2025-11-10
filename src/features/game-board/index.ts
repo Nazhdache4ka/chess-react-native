@@ -1,1 +1,3 @@
-export * from './ui/game-board';
+export * from './ui/';
+export * from './hooks/';
+export * from './lib/';

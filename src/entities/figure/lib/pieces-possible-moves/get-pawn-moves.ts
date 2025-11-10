@@ -1,14 +1,17 @@
-import { ChessPieceTeam, IChessPiece, IChessPieceMovement } from "../../../../shared/models/interfaces";
-import { MAX_ROW, MAX_COL, MIN_ROW, MIN_COL } from "../../../../shared/models/model";
+import { ChessPieceTeam, IChessBoardElement, IChessPieceMovement } from "@/shared/types/";
+import { MAX_ROW, MAX_COL, MIN_ROW, MIN_COL } from "@/shared/models/";
+import { getCoordinatesFromId } from "@/shared/utils/";
 
-export function getPawnMoves (value: IChessPiece | null, row: number, col: number): IChessPieceMovement[] {
-    if (!value) {
+export function getPawnMoves (element: IChessBoardElement): IChessPieceMovement[] {
+    if (!element.value) {
         return [];
     }
 
+    const { row, col } = getCoordinatesFromId(element.id);
+
     const moves: IChessPieceMovement[] = [];
 
-    if (value.team === ChessPieceTeam.WHITE) {
+    if (element.value.team === ChessPieceTeam.WHITE) {
 
         if (row > MIN_ROW && row < MAX_ROW) {
 
@@ -28,7 +31,7 @@ export function getPawnMoves (value: IChessPiece | null, row: number, col: numbe
         }
     } 
 
-    if (value.team === ChessPieceTeam.BLACK) {
+    if (element.value.team === ChessPieceTeam.BLACK) {
 
         if (row > MIN_ROW && row < MAX_ROW) {
 

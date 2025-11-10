@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
-import { IChessPiece } from "../../../shared/models/interfaces";
-import { getChessPieceSymbol } from "../lib/get-chess-piece-symbol"
+import { IChessPiece } from "@/shared/types/";
+import { getChessPieceSymbol } from "../lib/"
 
 interface PieceProps {
     value: IChessPiece | null;

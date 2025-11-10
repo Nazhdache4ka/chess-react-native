@@ -1,5 +1,4 @@
-import { ChessPieceTeam, ChessPieceType } from "../../../shared/models/interfaces";
-import { IChessBoardElement } from "../../../shared/models/interfaces";
+import { ChessPieceTeam, ChessPieceType, IChessBoardElement } from "@/shared/types/";
 
 export function fillChessBoard(elements: IChessBoardElement[][]): IChessBoardElement[][] {
     const newElements = [...elements];
