@@ -3,7 +3,7 @@ import { ChessPieceTeam, ChessPieceType, IChessBoardElement } from "@/shared/typ
 export function fillChessBoard(elements: IChessBoardElement[][]): IChessBoardElement[][] {
     const newElements = [...elements];
 
-    newElements.forEach((row: IChessBoardElement[], indexRow: number) => {
+    newElements.forEach((row, indexRow) => {
         row.forEach((element: IChessBoardElement, indexColumn: number) => {
             if (indexRow === 0 || indexRow === 1) {
                 element.value = {
