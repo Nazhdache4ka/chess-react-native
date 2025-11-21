@@ -1,14 +1,14 @@
-import { Board } from "@/entities/board/"
-import { useGameBoard } from "../hooks/";
+import { Board } from '@/entities/board/';
+import { useGameBoard } from '../hooks/';
 
 export function GameBoard() {
-    const {
-         elements,
-         highlightedElements,
-         handleClick,
-    } = useGameBoard();
+  const { elements, highlightedElements, handleClick } = useGameBoard();
 
-    return (
-        <Board elements={elements} handleClick={handleClick} highlightedElements={highlightedElements} />
-    )
+  return (
+    <Board
+      elements={elements}
+      handleClick={handleClick}
+      highlightedElements={highlightedElements}
+    />
+  );
 }
