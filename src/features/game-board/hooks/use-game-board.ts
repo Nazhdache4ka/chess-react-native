@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getInitialElements } from '@/entities/board/';
 import { fillChessBoard } from '@/entities/board/';
 import { ChessPieceTeam, IChessBoardElement } from '@/shared/types/';
 import { useChessClickHandler } from './use-chess-click-handler';
 
 export function useGameBoard() {
-  const [elements, setElements] = useState<IChessBoardElement[][]>(() => getInitialElements());
+  const [elements, setElements] = useState<IChessBoardElement[][]>(() => fillChessBoard(getInitialElements()));
   const [currentPlayer, setCurrentPlayer] = useState<ChessPieceTeam>(ChessPieceTeam.WHITE);
   const { selectedElement, highlightedElements, setSelectedElement, handleClick } = useChessClickHandler(
     elements,
@@ -13,10 +13,6 @@ export function useGameBoard() {
     setElements,
     setCurrentPlayer
   );
-
-  useEffect(() => {
-    setElements(fillChessBoard(getInitialElements()));
-  }, []);
 
   return {
     elements,
