@@ -1,5 +1,4 @@
 import { IChessBoardElement, IChessPieceMovement } from '@/shared/types/';
-import { getCoordinatesFromId } from '@/shared/utils/';
 
 export function knightValidation(
   possibleMoves: IChessPieceMovement[],
@@ -9,8 +8,6 @@ export function knightValidation(
   if (possibleMoves.length === 0) {
     return [];
   }
-
-  const { row: selectedElementRow, col: selectedElementCol } = getCoordinatesFromId(selectedElement.id);
 
   const highlightedElements: IChessPieceMovement[] = [];
 

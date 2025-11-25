@@ -24,11 +24,7 @@ export function Cell({ rowIndex, colIndex, element, highlightedElements, handleC
       onPress={() => handleClick(rowIndex, colIndex, element)}
       activeOpacity={0.7}
     >
-      <Piece
-        value={element.value}
-        row={rowIndex}
-        col={colIndex}
-      />
+      <Piece value={element.value} />
     </TouchableOpacity>
   );
 }

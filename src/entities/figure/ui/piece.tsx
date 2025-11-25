@@ -4,11 +4,9 @@ import { getChessPieceSymbol } from '../lib/';
 
 interface PieceProps {
   value: IChessPiece | null;
-  row: number;
-  col: number;
 }
 
-export function Piece({ value, row, col }: PieceProps) {
+export function Piece({ value }: PieceProps) {
   const pieceSymbol = getChessPieceSymbol(value);
 
   return (
