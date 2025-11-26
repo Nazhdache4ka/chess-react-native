@@ -2,6 +2,7 @@ import { useState, Dispatch, SetStateAction } from 'react';
 import { ChessPieceTeam, IChessBoardElement, IChessPieceMovement } from '@/shared/types/';
 import { useHighlightedElements } from './use-highlighted-elements';
 import { moveHandler } from '../lib/';
+import { possibleCheckAfterMoveValidation } from '../lib/check-detection/';
 
 export function useChessClickHandler(
   elements: IChessBoardElement[][],
@@ -25,6 +26,10 @@ export function useChessClickHandler(
       );
 
       if (isHighlightedCell) {
+        if (possibleCheckAfterMoveValidation(elements, currentPlayer, selectedElement, rowIndex, colIndex)) {
+          alert('Illegal move');
+          return;
+        }
         moveHandler(selectedElement, rowIndex, colIndex, elements, setElements);
         setCurrentPlayer((prevPlayer) =>
           prevPlayer === ChessPieceTeam.WHITE ? ChessPieceTeam.BLACK : ChessPieceTeam.WHITE
