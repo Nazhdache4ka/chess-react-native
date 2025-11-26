@@ -7,7 +7,6 @@ export function bishopAndQueenDetection(
   kingRow: number,
   kingCol: number
 ) {
-  // Check up-right diagonal
   for (let row = kingRow - 1, col = kingCol + 1; row >= MIN_ROW && col <= MAX_COL; row--, col++) {
     const element = elements[row][col];
     if (element.value) {
@@ -21,7 +20,6 @@ export function bishopAndQueenDetection(
     }
   }
 
-  // Check up-left diagonal
   for (let row = kingRow - 1, col = kingCol - 1; row >= MIN_ROW && col >= MIN_COL; row--, col--) {
     const element = elements[row][col];
     if (element.value) {
@@ -35,7 +33,6 @@ export function bishopAndQueenDetection(
     }
   }
 
-  // Check down-right diagonal
   for (let row = kingRow + 1, col = kingCol + 1; row <= MAX_ROW && col <= MAX_COL; row++, col++) {
     const element = elements[row][col];
     if (element.value) {
@@ -49,7 +46,6 @@ export function bishopAndQueenDetection(
     }
   }
 
-  // Check down-left diagonal
   for (let row = kingRow + 1, col = kingCol - 1; row <= MAX_ROW && col >= MIN_COL; row++, col--) {
     const element = elements[row][col];
     if (element.value) {
