@@ -6,10 +6,11 @@ interface BoardProps {
   elements: IChessBoardElement[][];
   highlightedElements: IChessPieceMovement[];
   isKingChecked: boolean;
+  isCheckmate: boolean;
   handleClick: (rowIndex: number, colIndex: number, element: IChessBoardElement) => void;
 }
 
-export function Board({ elements, highlightedElements, isKingChecked, handleClick }: BoardProps) {
+export function Board({ elements, highlightedElements, isKingChecked, isCheckmate, handleClick }: BoardProps) {
   return (
     <View style={styles.container}>
       <View style={styles.board}>
@@ -31,7 +32,11 @@ export function Board({ elements, highlightedElements, isKingChecked, handleClic
           </View>
         ))}
       </View>
-      {isKingChecked && <Text style={styles.checkText}>King is checked</Text>}
+      {isCheckmate ? (
+        <Text style={styles.checkText}>Checkmate</Text>
+      ) : (
+        isKingChecked && <Text style={styles.checkText}>King is checked</Text>
+      )}
     </View>
   );
 }

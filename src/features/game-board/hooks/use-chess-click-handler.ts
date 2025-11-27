@@ -7,6 +7,7 @@ import { possibleCheckAfterMoveValidation } from '../lib/check-detection/';
 export function useChessClickHandler(
   elements: IChessBoardElement[][],
   currentPlayer: ChessPieceTeam,
+  isCheckmate: boolean,
   setElements: Dispatch<SetStateAction<IChessBoardElement[][]>>,
   setCurrentPlayer: Dispatch<SetStateAction<ChessPieceTeam>>
 ) {
@@ -14,6 +15,10 @@ export function useChessClickHandler(
   const highlightedElements = useHighlightedElements(selectedElement, elements);
 
   const handleClick = (rowIndex: number, colIndex: number, element: IChessBoardElement) => {
+    if (isCheckmate) {
+      return;
+    }
+
     if (selectedElement === null && element.value !== null) {
       if (element.value?.team === currentPlayer) {
         setSelectedElement(element);
