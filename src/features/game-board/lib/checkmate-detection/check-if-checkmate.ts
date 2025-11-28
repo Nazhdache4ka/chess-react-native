@@ -1,11 +1,11 @@
 import { getPossibleMoves } from '@/entities/figure';
 import { ChessPieceTeam, IChessBoardElement } from '@/shared/types';
-import { isKingChecked } from '../check-detection/is-king-checked';
+import { checkIsKingChecked } from '../check-detection';
 import { validateMove } from '../validate-move';
-import { possibleCheckAfterMoveValidation } from '../check-detection/possible-check-after-move-valid';
+import { possibleCheckAfterMoveValidation } from '../check-detection';
 
-export function isCheckmate(elements: IChessBoardElement[][], currentPlayer: ChessPieceTeam) {
-  if (!isKingChecked(elements, currentPlayer)) {
+export function checkIfCheckmate(elements: IChessBoardElement[][], currentPlayer: ChessPieceTeam) {
+  if (!checkIsKingChecked(elements, currentPlayer)) {
     return false;
   }
 

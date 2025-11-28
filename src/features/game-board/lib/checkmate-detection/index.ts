@@ -1,1 +1,1 @@
-export * from './is-checkmate';
+export * from './check-if-checkmate';

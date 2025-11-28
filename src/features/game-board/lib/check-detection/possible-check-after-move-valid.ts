@@ -1,6 +1,6 @@
 import { ChessPieceTeam, IChessBoardElement } from '@/shared/types';
-import { isKingChecked } from './is-king-checked';
-import { simulateMoves } from '@/shared/utils/';
+import { checkIsKingChecked } from './check-is-king-checked';
+import { getCoordinatesFromId } from '@/shared/utils/';
 
 export function possibleCheckAfterMoveValidation(
   elements: IChessBoardElement[][],
@@ -9,13 +9,17 @@ export function possibleCheckAfterMoveValidation(
   rowIndex: number,
   colIndex: number
 ) {
-  const newElements = simulateMoves(elements, selectedElement, rowIndex, colIndex);
+  const { row: selectedElementRow, col: selectedElementCol } = getCoordinatesFromId(selectedElement.id);
 
-  if (!newElements) {
-    return false;
-  }
+  const newElements = elements.map((row: IChessBoardElement[]) =>
+    row.map((element: IChessBoardElement) => ({ ...element }))
+  );
 
-  if (isKingChecked(newElements, currentPlayer)) {
+  const newElement = newElements[selectedElementRow][selectedElementCol].value;
+  newElements[rowIndex][colIndex].value = newElement;
+  newElements[selectedElementRow][selectedElementCol].value = null;
+
+  if (checkIsKingChecked(newElements, currentPlayer)) {
     return true;
   }
   return false;
