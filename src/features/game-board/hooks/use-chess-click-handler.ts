@@ -32,10 +32,11 @@ export function useChessClickHandler(
 
       if (isHighlightedCell) {
         if (possibleCheckAfterMoveValidation(elements, currentPlayer, selectedElement, rowIndex, colIndex)) {
+          setSelectedElement(null);
           alert('Illegal move');
           return;
         }
-        moveHandler(selectedElement, rowIndex, colIndex, elements, setElements);
+        moveHandler(selectedElement, rowIndex, colIndex, setElements);
         setCurrentPlayer((prevPlayer) =>
           prevPlayer === ChessPieceTeam.WHITE ? ChessPieceTeam.BLACK : ChessPieceTeam.WHITE
         );
