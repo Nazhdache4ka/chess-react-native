@@ -1,6 +1,7 @@
 import { IChessBoardElement, IChessPieceMovement } from '@/shared/types/';
 import { getCoordinatesFromId } from '@/shared/utils/';
 import { MAX_ROW, MAX_COL, MIN_ROW, MIN_COL } from '@/shared/models/';
+import { knightMoves } from '@/shared/models';
 
 export function getKnightMoves(element: IChessBoardElement): IChessPieceMovement[] {
   if (!element.value) {
@@ -22,14 +23,3 @@ export function getKnightMoves(element: IChessBoardElement): IChessPieceMovement
 
   return moves;
 }
-
-const knightMoves = [
-  { row: -2, col: -1 },
-  { row: -2, col: 1 },
-  { row: -1, col: -2 },
-  { row: -1, col: 2 },
-  { row: 1, col: -2 },
-  { row: 1, col: 2 },
-  { row: 2, col: -1 },
-  { row: 2, col: 1 },
-];
