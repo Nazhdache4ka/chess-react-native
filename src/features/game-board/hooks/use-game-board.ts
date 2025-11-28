@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getInitialElements } from '@/entities/board/';
 import { fillChessBoard } from '@/entities/board/';
-import { isKingChecked as checkIfKingIsChecked } from '../lib/check-detection/is-king-checked';
+import { checkIsKingChecked } from '../lib/';
 import { ChessPieceTeam, IChessBoardElement } from '@/shared/types/';
 import { useChessClickHandler } from './use-chess-click-handler';
 
@@ -17,7 +17,7 @@ export function useGameBoard() {
   );
 
   useEffect(() => {
-    setIsKingChecked(checkIfKingIsChecked(elements, currentPlayer));
+    setIsKingChecked(checkIsKingChecked(elements, currentPlayer));
   }, [elements, currentPlayer]);
 
   return {

@@ -1,8 +1,8 @@
 import { useState, Dispatch, SetStateAction } from 'react';
 import { ChessPieceTeam, IChessBoardElement, IChessPieceMovement } from '@/shared/types/';
 import { useHighlightedElements } from './use-highlighted-elements';
-import { moveHandler } from '../lib/';
-import { possibleCheckAfterMoveValidation } from '../lib/check-detection/';
+import { moveHandler } from '../lib';
+import { possibleCheckAfterMoveValidation } from '../lib';
 
 export function useChessClickHandler(
   elements: IChessBoardElement[][],

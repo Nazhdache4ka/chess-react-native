@@ -1,2 +1,2 @@
-export * from './is-king-checked';
+export * from './check-is-king-checked';
 export * from './possible-check-after-move-valid';

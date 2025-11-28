@@ -1,5 +1,5 @@
 import { ChessPieceTeam, IChessBoardElement } from '@/shared/types';
-import { isKingChecked } from './is-king-checked';
+import { checkIsKingChecked } from './check-is-king-checked';
 import { getCoordinatesFromId } from '@/shared/utils/';
 
 export function possibleCheckAfterMoveValidation(
@@ -19,7 +19,7 @@ export function possibleCheckAfterMoveValidation(
   newElements[rowIndex][colIndex].value = newElement;
   newElements[selectedElementRow][selectedElementCol].value = null;
 
-  if (isKingChecked(newElements, currentPlayer)) {
+  if (checkIsKingChecked(newElements, currentPlayer)) {
     return true;
   }
   return false;
