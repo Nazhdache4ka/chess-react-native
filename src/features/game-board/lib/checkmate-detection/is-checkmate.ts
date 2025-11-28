@@ -1,4 +1,4 @@
-import { getPossibleMoves } from '@/entities/figure/lib/get-possible-moves';
+import { getPossibleMoves } from '@/entities/figure';
 import { ChessPieceTeam, IChessBoardElement } from '@/shared/types';
 import { isKingChecked } from '../check-detection/is-king-checked';
 import { validateMove } from '../validate-move';
