@@ -7,6 +7,7 @@ import { possibleCheckAfterMoveValidation } from '../lib';
 export function useChessClickHandler(
   elements: IChessBoardElement[][],
   currentPlayer: ChessPieceTeam,
+  isCheckmate: boolean,
   setElements: Dispatch<SetStateAction<IChessBoardElement[][]>>,
   setCurrentPlayer: Dispatch<SetStateAction<ChessPieceTeam>>
 ) {
@@ -14,6 +15,10 @@ export function useChessClickHandler(
   const highlightedElements = useHighlightedElements(selectedElement, elements);
 
   const handleClick = (rowIndex: number, colIndex: number, element: IChessBoardElement) => {
+    if (isCheckmate) {
+      return;
+    }
+
     if (selectedElement === null && element.value !== null) {
       if (element.value?.team === currentPlayer) {
         setSelectedElement(element);
@@ -27,10 +32,11 @@ export function useChessClickHandler(
 
       if (isHighlightedCell) {
         if (possibleCheckAfterMoveValidation(elements, currentPlayer, selectedElement, rowIndex, colIndex)) {
+          setSelectedElement(null);
           alert('Illegal move');
           return;
         }
-        moveHandler(selectedElement, rowIndex, colIndex, elements, setElements);
+        moveHandler(selectedElement, rowIndex, colIndex, setElements);
         setCurrentPlayer((prevPlayer) =>
           prevPlayer === ChessPieceTeam.WHITE ? ChessPieceTeam.BLACK : ChessPieceTeam.WHITE
         );

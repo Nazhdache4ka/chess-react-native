@@ -3,7 +3,7 @@ import { Board } from '@/entities/board/';
 import { useGameBoard } from '../hooks/';
 
 export function GameBoard() {
-  const { elements, highlightedElements, isKingChecked, handleClick } = useGameBoard();
+  const { elements, highlightedElements, isKingChecked, isCheckmate, handleClick } = useGameBoard();
 
   return (
     <View style={styles.container}>
@@ -13,6 +13,7 @@ export function GameBoard() {
         highlightedElements={highlightedElements}
       />
       {isKingChecked && <Text style={styles.checkText}>King is checked</Text>}
+      {isCheckmate && <Text style={styles.checkText}>Checkmate</Text>}
       {/* TODO: replace to new feature game-info */}
     </View>
   );
