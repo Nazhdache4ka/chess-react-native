@@ -1,7 +1,5 @@
-import { ChessPieceTeam, IChessBoardElement } from '@/shared/types';
-import { MIN_ROW, MAX_ROW, MIN_COL, MAX_COL } from '@/shared/models';
-import { knightMoves } from '@/shared/models';
-import { ChessPieceType } from '@/shared/types';
+import { ChessPieceTeam, IChessBoardElement, ChessPieceType } from '@/shared/types';
+import { MIN_ROW, MAX_ROW, MIN_COL, MAX_COL, knightMoves } from '@/shared/models';
 
 export function knightDetection(
   elements: IChessBoardElement[][],

@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
-import { getInitialElements } from '@/entities/board/';
-import { fillChessBoard } from '@/entities/board/';
-import { checkIsKingChecked } from '../lib/';
-import { checkIfCheckmate } from '../lib/';
+import { getInitialElements, fillChessBoard } from '@/entities/board/';
 import { ChessPieceTeam, IChessBoardElement } from '@/shared/types/';
 import { useChessClickHandler } from './use-chess-click-handler';
+import { checkIsKingChecked, checkIfCheckmate } from '../lib/';
 
 export function useGameBoard() {
   const [elements, setElements] = useState<IChessBoardElement[][]>(() => fillChessBoard(getInitialElements()));
