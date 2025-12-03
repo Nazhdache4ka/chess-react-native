@@ -1,9 +1,11 @@
 import { View, StyleSheet, Text } from 'react-native';
-import { Board } from '@/entities/board/';
-import { useGameBoard } from '../hooks/';
+import { Board } from '@/entities/board';
+import { useGameStore } from '@/shared';
+import { useGameBoard } from '../hooks';
 
 export function GameBoard() {
-  const { elements, highlightedElements, isKingChecked, isCheckmate, handleClick } = useGameBoard();
+  const { elements, highlightedElements, handleClick } = useGameBoard();
+  const { isKingChecked, isCheckmate } = useGameStore();
 
   return (
     <View style={styles.container}>
@@ -22,8 +24,10 @@ export function GameBoard() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: '100%',
     width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   checkText: {
