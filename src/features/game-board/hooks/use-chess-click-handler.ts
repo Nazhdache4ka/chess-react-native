@@ -1,5 +1,5 @@
 import { useState, Dispatch, SetStateAction } from 'react';
-import { ChessPieceTeam, IChessBoardElement, IChessPieceMovement } from '@/shared/types';
+import { ChessPieceTeam, IChessBoardElement, IChessPieceMovement, onIllegalMoveVib, onRegularMoveVib } from '@/shared';
 import { useHighlightedElements } from './use-highlighted-elements';
 import { moveHandler, possibleCheckAfterMoveValidation } from '../lib';
 
@@ -32,10 +32,11 @@ export function useChessClickHandler(
       if (isHighlightedCell) {
         if (possibleCheckAfterMoveValidation(elements, currentPlayer, selectedElement, rowIndex, colIndex)) {
           setSelectedElement(null);
-          alert('Illegal move');
+          onIllegalMoveVib();
           return;
         }
         moveHandler(selectedElement, rowIndex, colIndex, setElements);
+        onRegularMoveVib();
         setCurrentPlayer((prevPlayer) =>
           prevPlayer === ChessPieceTeam.WHITE ? ChessPieceTeam.BLACK : ChessPieceTeam.WHITE
         );
