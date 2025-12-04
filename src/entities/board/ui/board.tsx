@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
     height: '45%',
   },
   row: {
-    flexDirection: 'row',
     flex: 1,
+    flexDirection: 'row',
+    margin: -1,
   },
 });

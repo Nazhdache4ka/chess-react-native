@@ -1,13 +1,15 @@
 import { StyleSheet, KeyboardAvoidingView } from 'react-native';
-import { GameBoard } from '@/features/game-board/index';
+import { ChessBoard } from '@/widgets';
 
 export default function App() {
   return (
-    <KeyboardAvoidingView behavior='padding' style={styles.container}>
-      <GameBoard />
+    <KeyboardAvoidingView
+      behavior="padding"
+      style={styles.container}
+    >
+      <ChessBoard />
     </KeyboardAvoidingView>
   );
-  
 }
 
 const styles = StyleSheet.create({
@@ -16,5 +18,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
 });
