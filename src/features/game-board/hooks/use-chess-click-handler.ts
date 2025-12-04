@@ -27,7 +27,7 @@ export function useChessClickHandler() {
       if (isHighlightedCell) {
         if (possibleCheckAfterMoveValidation(elements, currentPlayer, selectedElement, rowIndex, colIndex)) {
           setSelectedElement(null);
-          alert('Illegal move');
+          onIllegalMoveVib();
           return;
         }
         const newElements = moveHandler(elements, selectedElement, rowIndex, colIndex);
@@ -35,6 +35,10 @@ export function useChessClickHandler() {
           setElements(newElements);
         }
         setCurrentPlayer(currentPlayer === ChessPieceTeam.WHITE ? ChessPieceTeam.BLACK : ChessPieceTeam.WHITE);
+        onRegularMoveVib();
+        setCurrentPlayer((prevPlayer) =>
+          prevPlayer === ChessPieceTeam.WHITE ? ChessPieceTeam.BLACK : ChessPieceTeam.WHITE
+        );
         setSelectedElement(null);
       } else {
         if (element.value?.team === currentPlayer) {

@@ -1,5 +1,5 @@
 import { getPossibleMoves } from '@/entities/figure';
-import { ChessPieceTeam, IChessBoardElement } from '@/shared/types';
+import { ChessPieceTeam, IChessBoardElement } from '@/shared';
 import { checkIsKingChecked, possibleCheckAfterMoveValidation } from '../check-detection';
 import { validateMove } from '../validate-move';
 
