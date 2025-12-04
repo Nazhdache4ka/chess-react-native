@@ -24,10 +24,13 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   checkText: {
-    position: 'relative',
+    position: 'absolute',
+    bottom: 100,
     fontSize: 24,
     fontWeight: 'bold',
     color: 'red',
