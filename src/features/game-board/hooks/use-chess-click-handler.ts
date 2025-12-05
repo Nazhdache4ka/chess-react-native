@@ -1,15 +1,10 @@
-import { useState, Dispatch, SetStateAction } from 'react';
-import { ChessPieceTeam, IChessBoardElement, IChessPieceMovement, onIllegalMoveVib, onRegularMoveVib } from '@/shared';
+import { useState } from 'react';
+import { ChessPieceTeam, IChessBoardElement, IChessPieceMovement, useGameStore } from '@/shared';
 import { useHighlightedElements } from './use-highlighted-elements';
 import { moveHandler, possibleCheckAfterMoveValidation } from '../lib';
 
-export function useChessClickHandler(
-  elements: IChessBoardElement[][],
-  currentPlayer: ChessPieceTeam,
-  isCheckmate: boolean,
-  setElements: Dispatch<SetStateAction<IChessBoardElement[][]>>,
-  setCurrentPlayer: Dispatch<SetStateAction<ChessPieceTeam>>
-) {
+export function useChessClickHandler() {
+  const { elements, currentPlayer, isCheckmate, setElements, setCurrentPlayer } = useGameStore();
   const [selectedElement, setSelectedElement] = useState<IChessBoardElement | null>(null);
   const highlightedElements = useHighlightedElements(selectedElement, elements);
 
@@ -35,7 +30,11 @@ export function useChessClickHandler(
           onIllegalMoveVib();
           return;
         }
-        moveHandler(selectedElement, rowIndex, colIndex, setElements);
+        const newElements = moveHandler(elements, selectedElement, rowIndex, colIndex);
+        if (newElements) {
+          setElements(newElements);
+        }
+        setCurrentPlayer(currentPlayer === ChessPieceTeam.WHITE ? ChessPieceTeam.BLACK : ChessPieceTeam.WHITE);
         onRegularMoveVib();
         setCurrentPlayer((prevPlayer) =>
           prevPlayer === ChessPieceTeam.WHITE ? ChessPieceTeam.BLACK : ChessPieceTeam.WHITE
@@ -54,7 +53,6 @@ export function useChessClickHandler(
   return {
     selectedElement,
     highlightedElements,
-    setSelectedElement,
     handleClick,
   };
 }
