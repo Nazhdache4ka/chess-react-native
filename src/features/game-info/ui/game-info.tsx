@@ -1,12 +1,9 @@
+import { PropsWithChildren } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { ChessPieceTeam } from '@/shared';
 import { Timer } from './components';
 
-interface GameInfoProps {
-  children: React.ReactNode;
-}
-
-export function GameInfo({ children }: GameInfoProps) {
+export function GameInfo({ children }: PropsWithChildren) {
   return (
     <View style={styles.container}>
       <View style={styles.upperSection}>

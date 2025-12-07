@@ -1,15 +1,24 @@
 import { useState } from 'react';
-import { ChessPieceTeam, IChessBoardElement, IChessPieceMovement, useGameStore } from '@/shared';
+import {
+  ChessPieceTeam,
+  IChessBoardElement,
+  IChessPieceMovement,
+  useGameStore,
+  onIllegalMoveVib,
+  onRegularMoveVib,
+  useGameInfoStore,
+} from '@/shared';
 import { useHighlightedElements } from './use-highlighted-elements';
 import { moveHandler, possibleCheckAfterMoveValidation } from '../lib';
 
 export function useChessClickHandler() {
   const { elements, currentPlayer, isCheckmate, setElements, setCurrentPlayer } = useGameStore();
+  const { whiteTime, blackTime } = useGameInfoStore();
   const [selectedElement, setSelectedElement] = useState<IChessBoardElement | null>(null);
   const highlightedElements = useHighlightedElements(selectedElement, elements);
 
   const handleClick = (rowIndex: number, colIndex: number, element: IChessBoardElement) => {
-    if (isCheckmate) {
+    if (isCheckmate || whiteTime === 0 || blackTime === 0) {
       return;
     }
 
@@ -36,9 +45,7 @@ export function useChessClickHandler() {
         }
         setCurrentPlayer(currentPlayer === ChessPieceTeam.WHITE ? ChessPieceTeam.BLACK : ChessPieceTeam.WHITE);
         onRegularMoveVib();
-        setCurrentPlayer((prevPlayer) =>
-          prevPlayer === ChessPieceTeam.WHITE ? ChessPieceTeam.BLACK : ChessPieceTeam.WHITE
-        );
+        setCurrentPlayer(currentPlayer === ChessPieceTeam.WHITE ? ChessPieceTeam.BLACK : ChessPieceTeam.WHITE);
         setSelectedElement(null);
       } else {
         if (element.value?.team === currentPlayer) {

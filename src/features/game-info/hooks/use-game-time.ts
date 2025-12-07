@@ -1,9 +1,8 @@
-import { ChessPieceTeam, useGameStore } from '@/shared';
-import { useEffect, useState } from 'react';
+import { ChessPieceTeam, useGameStore, useGameInfoStore } from '@/shared';
+import { useEffect } from 'react';
 
 export function useGameTime() {
-  const [whiteTime, setWhiteTime] = useState(60);
-  const [blackTime, setBlackTime] = useState(60);
+  const { whiteTime, blackTime, setWhiteTime, setBlackTime } = useGameInfoStore();
   const { isCheckmate, currentPlayer } = useGameStore();
 
   useEffect(() => {
@@ -13,24 +12,14 @@ export function useGameTime() {
 
     const interval = setInterval(() => {
       if (currentPlayer === ChessPieceTeam.WHITE) {
-        setWhiteTime((prev) => {
-          if (prev > 0) {
-            return prev - 1;
-          }
-          return 0;
-        });
+        setWhiteTime(whiteTime > 0 ? whiteTime - 1 : 0);
       } else {
-        setBlackTime((prev) => {
-          if (prev > 0) {
-            return prev - 1;
-          }
-          return 0;
-        });
+        setBlackTime(blackTime > 0 ? blackTime - 1 : 0);
       }
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [currentPlayer, isCheckmate]);
+  }, [currentPlayer, isCheckmate, whiteTime, blackTime, setWhiteTime, setBlackTime]);
 
   return {
     whiteTime,
