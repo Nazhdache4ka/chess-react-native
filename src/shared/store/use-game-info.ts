@@ -11,8 +11,8 @@ interface GameInfoStore {
 }
 
 export const useGameInfoStore = create<GameInfoStore>((set) => ({
-  whiteTime: 60,
-  blackTime: 60,
+  whiteTime: 10,
+  blackTime: 10,
   phase: GamePhase.PAUSE,
   setWhiteTime: (whiteTime: number) => set({ whiteTime }),
   setBlackTime: (blackTime: number) => set({ blackTime }),

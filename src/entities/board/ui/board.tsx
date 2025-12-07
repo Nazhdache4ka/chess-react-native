@@ -9,6 +9,7 @@ interface BoardProps {
 }
 
 export function Board({ elements, highlightedElements, handleClick }: BoardProps) {
+  console.log('board render');
   return (
     <View style={styles.board}>
       {elements.map((row: IChessBoardElement[], rowIndex: number) => (

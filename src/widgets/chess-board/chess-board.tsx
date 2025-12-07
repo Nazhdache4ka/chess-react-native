@@ -1,5 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 import { GameBoard, GameInfo, GameSettings } from '@/features';
+import { GamePhaseManager } from './game-phase-manager';
 
 export function ChessBoard() {
   return (
@@ -8,6 +9,7 @@ export function ChessBoard() {
       <GameInfo>
         <GameBoard />
       </GameInfo>
+      <GamePhaseManager />
     </View>
   );
 }

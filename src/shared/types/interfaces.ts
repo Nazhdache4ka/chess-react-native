@@ -35,6 +35,7 @@ export const GamePhase = {
   START: 'start',
   PAUSE: 'pause',
   ONGOING: 'ongoing',
+  FINISHED: 'finished',
 } as const;
 
 export type GamePhase = (typeof GamePhase)[keyof typeof GamePhase];

@@ -1,14 +1,15 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { View, StyleSheet } from 'react-native';
 import LottieView from 'lottie-react-native';
+import { GamePhase, useGameInfoStore } from '@/shared';
 
-interface LottieStartProps {
-  isVisible: boolean;
-  onComplete: () => void;
-}
-
-export function LottieStart({ isVisible, onComplete }: LottieStartProps) {
+export function LottieStart() {
   const animationRef = useRef<LottieView>(null);
+  const { phase, setPhase } = useGameInfoStore();
+
+  const isVisible = useMemo(() => {
+    return phase === GamePhase.START;
+  }, [phase]);
 
   useEffect(() => {
     if (isVisible && animationRef.current) {
@@ -21,6 +22,10 @@ export function LottieStart({ isVisible, onComplete }: LottieStartProps) {
   if (!isVisible) {
     return null;
   }
+
+  const onComplete = () => {
+    setPhase(GamePhase.ONGOING);
+  };
 
   return (
     <View style={styles.container}>
