@@ -11,7 +11,7 @@ export function Button({ title, disabled, onPress }: ButtonProps) {
     <Pressable
       onPress={onPress}
       disabled={disabled}
-      style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
+      style={({ pressed }) => [styles.button, pressed && styles.buttonPressed, disabled && styles.buttonDisabled]}
     >
       {({ pressed }) => <Text style={[styles.buttonText, pressed && styles.buttonTextPressed]}>{title}</Text>}
     </Pressable>
@@ -42,5 +42,9 @@ const styles = StyleSheet.create({
 
   buttonTextPressed: {
     color: 'white',
+  },
+
+  buttonDisabled: {
+    opacity: 0.5,
   },
 });
