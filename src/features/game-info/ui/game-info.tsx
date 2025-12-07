@@ -9,7 +9,7 @@ export function GameInfo({ children }: PropsWithChildren) {
       <View style={styles.upperSection}>
         <Timer currentTeam={ChessPieceTeam.BLACK} />
       </View>
-      {children}
+      <View style={styles.boardContainer}>{children}</View>
       <View style={styles.lowerSection}>
         <Timer currentTeam={ChessPieceTeam.WHITE} />
       </View>
@@ -26,21 +26,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   upperSection: {
-    position: 'absolute',
-    top: 160,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
     width: '100%',
-    height: '10%',
+    marginBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  boardContainer: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
   },
   lowerSection: {
-    position: 'absolute',
-    bottom: 160,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
     width: '100%',
-    height: '10%',
+    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

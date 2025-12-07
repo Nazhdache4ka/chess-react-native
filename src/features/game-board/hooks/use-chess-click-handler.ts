@@ -7,18 +7,19 @@ import {
   onIllegalMoveVib,
   onRegularMoveVib,
   useGameInfoStore,
+  GamePhase,
 } from '@/shared';
 import { useHighlightedElements } from './use-highlighted-elements';
 import { moveHandler, possibleCheckAfterMoveValidation } from '../lib';
 
 export function useChessClickHandler() {
   const { elements, currentPlayer, isCheckmate, setElements, setCurrentPlayer } = useGameStore();
-  const { whiteTime, blackTime } = useGameInfoStore();
+  const { whiteTime, blackTime, phase } = useGameInfoStore();
   const [selectedElement, setSelectedElement] = useState<IChessBoardElement | null>(null);
   const highlightedElements = useHighlightedElements(selectedElement, elements);
 
   const handleClick = (rowIndex: number, colIndex: number, element: IChessBoardElement) => {
-    if (isCheckmate || whiteTime === 0 || blackTime === 0) {
+    if (isCheckmate || whiteTime === 0 || blackTime === 0 || phase !== GamePhase.ONGOING) {
       return;
     }
 
