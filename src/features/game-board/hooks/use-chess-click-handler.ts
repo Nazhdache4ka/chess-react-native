@@ -46,7 +46,6 @@ export function useChessClickHandler() {
         }
         setCurrentPlayer(currentPlayer === ChessPieceTeam.WHITE ? ChessPieceTeam.BLACK : ChessPieceTeam.WHITE);
         onRegularMoveVib();
-        setCurrentPlayer(currentPlayer === ChessPieceTeam.WHITE ? ChessPieceTeam.BLACK : ChessPieceTeam.WHITE);
         setSelectedElement(null);
       } else {
         if (element.value?.team === currentPlayer) {
