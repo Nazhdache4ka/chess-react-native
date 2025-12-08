@@ -1,11 +1,13 @@
 import { View, StyleSheet } from 'react-native';
-import { Button } from './components';
+import { useState } from 'react';
+import { Button, ModalSettings } from './components';
 import { ChessPieceTeam, GamePhase, useGameInfoStore, useGameStore } from '@/shared';
 import { fillChessBoard, getInitialElements } from '@/entities/board';
 
 export function GameSettings() {
   const { phase, setPhase, setWhiteTime, setBlackTime } = useGameInfoStore();
   const { setElements, setCurrentPlayer, setIsKingChecked, setIsCheckmate } = useGameStore();
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
 
   const handleStart = () => {
     setPhase(GamePhase.START);
@@ -25,23 +27,37 @@ export function GameSettings() {
     setIsCheckmate(false);
   };
 
-  console.log(phase);
+  const handleShowSettingsModal = () => {
+    setShowSettingsModal(true);
+  };
 
+  const handleCloseSettingsModal = () => {
+    setShowSettingsModal(false);
+  };
   return (
     <View style={styles.container}>
       <Button
-        title="Start"
         onPress={handleStart}
         disabled={phase !== GamePhase.PAUSE}
-      />
+      >
+        Start
+      </Button>
       <Button
-        title="Pause"
         onPress={handlePause}
         disabled={phase !== GamePhase.ONGOING}
-      />
+      >
+        Pause
+      </Button>
+      <Button onPress={handleRestart}>Restart</Button>
       <Button
-        title="Restart"
-        onPress={handleRestart}
+        onPress={handleShowSettingsModal}
+        disabled={phase === GamePhase.ONGOING || phase === GamePhase.START}
+      >
+        ⚙
+      </Button>
+      <ModalSettings
+        isOpen={showSettingsModal}
+        onClose={handleCloseSettingsModal}
       />
     </View>
   );
