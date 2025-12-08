@@ -1,6 +1,5 @@
 import { Modal, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useGameInfoStore } from '@/shared';
-import { Button } from './button';
+import { Button, useGameInfoStore } from '@/shared';
 
 interface ModalSettingsProps {
   isOpen: boolean;

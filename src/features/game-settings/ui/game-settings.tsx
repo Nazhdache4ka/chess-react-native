@@ -1,7 +1,7 @@
 import { View, StyleSheet } from 'react-native';
 import { useState } from 'react';
-import { Button, ModalSettings } from './components';
-import { ChessPieceTeam, GamePhase, useGameInfoStore, useGameStore } from '@/shared';
+import { ModalSettings } from './components';
+import { ChessPieceTeam, GamePhase, useGameInfoStore, useGameStore, Button } from '@/shared';
 import { fillChessBoard, getInitialElements } from '@/entities/board';
 
 export function GameSettings() {
@@ -51,7 +51,7 @@ export function GameSettings() {
       <Button onPress={handleRestart}>Restart</Button>
       <Button
         onPress={handleShowSettingsModal}
-        disabled={phase === GamePhase.ONGOING || phase === GamePhase.START}
+        disabled={phase !== GamePhase.PAUSE}
       >
         ⚙
       </Button>
