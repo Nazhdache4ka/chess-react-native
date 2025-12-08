@@ -32,12 +32,12 @@ export function GameSettings() {
       <Button
         title="Start"
         onPress={handleStart}
-        disabled={phase === GamePhase.ONGOING || phase === GamePhase.START}
+        disabled={phase !== GamePhase.PAUSE}
       />
       <Button
         title="Pause"
         onPress={handlePause}
-        disabled={phase === GamePhase.PAUSE}
+        disabled={phase !== GamePhase.ONGOING}
       />
       <Button
         title="Restart"
