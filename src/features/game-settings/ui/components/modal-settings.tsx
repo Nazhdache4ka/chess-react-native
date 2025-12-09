@@ -23,7 +23,8 @@ export function ModalSettings({ isOpen, onClose }: ModalSettingsProps) {
       animationType="fade"
       onRequestClose={onClose}
     >
-      <View style={styles.overlay}>
+      <View style={styles.overlay} />
+      <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
           <View style={styles.header}>
             <Text style={styles.title}>Settings</Text>
@@ -47,8 +48,15 @@ export function ModalSettings({ isOpen, onClose }: ModalSettingsProps) {
 
 const styles = StyleSheet.create({
   overlay: {
-    flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  modalContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
