@@ -1,13 +1,19 @@
-import { View, StyleSheet } from 'react-native';
-import { useState } from 'react';
+import { View, StyleSheet, Text } from 'react-native';
 import { ModalSettings } from './components';
-import { ChessPieceTeam, GamePhase, useGameInfoStore, useGameStore, Button } from '@/shared';
+import {
+  ChessPieceTeam,
+  GamePhase,
+  useGameInfoStore,
+  useGameStore,
+  Button,
+  ModalCompoundProvider,
+  ModalCompound,
+} from '@/shared';
 import { fillChessBoard, getInitialElements } from '@/entities/board';
 
 export function GameSettings() {
   const { phase, setPhase, setWhiteTime, setBlackTime } = useGameInfoStore();
   const { setElements, setCurrentPlayer, setIsKingChecked, setIsCheckmate } = useGameStore();
-  const [showSettingsModal, setShowSettingsModal] = useState(false);
 
   const handleStart = () => {
     setPhase(GamePhase.START);
@@ -26,40 +32,28 @@ export function GameSettings() {
     setIsKingChecked(false);
     setIsCheckmate(false);
   };
-
-  const handleShowSettingsModal = () => {
-    setShowSettingsModal(true);
-  };
-
-  const handleCloseSettingsModal = () => {
-    setShowSettingsModal(false);
-  };
   return (
-    <View style={styles.container}>
-      <Button
-        onPress={handleStart}
-        disabled={phase !== GamePhase.PAUSE}
-      >
-        Start
-      </Button>
-      <Button
-        onPress={handlePause}
-        disabled={phase !== GamePhase.ONGOING}
-      >
-        Pause
-      </Button>
-      <Button onPress={handleRestart}>Restart</Button>
-      <Button
-        onPress={handleShowSettingsModal}
-        disabled={phase !== GamePhase.PAUSE}
-      >
-        ⚙
-      </Button>
-      <ModalSettings
-        isOpen={showSettingsModal}
-        onClose={handleCloseSettingsModal}
-      />
-    </View>
+    <ModalCompoundProvider>
+      <View style={styles.container}>
+        <Button
+          onPress={handleStart}
+          disabled={phase !== GamePhase.PAUSE}
+        >
+          Start
+        </Button>
+        <Button
+          onPress={handlePause}
+          disabled={phase !== GamePhase.ONGOING}
+        >
+          Pause
+        </Button>
+        <Button onPress={handleRestart}>Restart</Button>
+        <ModalCompound.ModalTrigger disabled={phase !== GamePhase.PAUSE}>
+          <Text style={styles.triggerContent}>⚙</Text>
+        </ModalCompound.ModalTrigger>
+        <ModalSettings />
+      </View>
+    </ModalCompoundProvider>
   );
 }
 
@@ -72,5 +66,12 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     marginBottom: -25,
     width: '100%',
+  },
+
+  triggerContent: {
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 5,
+    padding: 10,
   },
 });
