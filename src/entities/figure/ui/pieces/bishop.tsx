@@ -1,35 +1,47 @@
 import React from 'react';
 import Svg, { G, Path } from 'react-native-svg';
+import { ChessPieceTeam, ISvgProps } from '@/shared';
 
-interface BlackBishopProps {
-  width?: number | string;
-  height?: number | string;
-}
+export function Bishop({ width = 45, height = 45, team }: ISvgProps) {
+  const fillColor = team === ChessPieceTeam.WHITE ? '#fff' : '#000';
+  const strokeColor = '#000';
 
-export function BlackBishop({ width = 45, height = 45 }: BlackBishopProps) {
   return (
-    <Svg width={width} height={height} viewBox="0 0 45 45">
+    <Svg
+      width={width}
+      height={height}
+      viewBox="0 0 45 45"
+    >
       <G
         opacity="1"
         fill="none"
         fillRule="evenodd"
         fillOpacity="1"
-        stroke="#000000"
+        stroke={strokeColor}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeMiterlimit="4"
         strokeDasharray="none"
         strokeOpacity="1"
-        transform="translate(0,0.6)">
-        <G fill="#000000" stroke="#000000" strokeLinecap="butt">
+        transform="translate(0,0.6)"
+      >
+        <G
+          fill={fillColor}
+          stroke={strokeColor}
+          strokeLinecap="butt"
+        >
           <Path d="M 9,36 C 12.39,35.03 19.11,36.43 22.5,34 C 25.89,36.43 32.61,35.03 36,36 C 36,36 37.65,36.54 39,38 C 38.32,38.97 37.35,38.99 36,38.5 C 32.61,37.53 25.89,38.96 22.5,37.5 C 19.11,38.96 12.39,37.53 9,38.5 C 7.65,38.99 6.68,38.97 6,38 C 7.35,36.54 9,36 9,36 z" />
           <Path d="M 15,32 C 17.5,34.5 27.5,34.5 30,32 C 30.5,30.5 30,30 30,30 C 30,27.5 27.5,26 27.5,26 C 33,24.5 33.5,14.5 22.5,10.5 C 11.5,14.5 12,24.5 17.5,26 C 17.5,26 15,27.5 15,30 C 15,30 14.5,30.5 15,32 z" />
           <Path d="M 25 8 A 2.5 2.5 0 1 1  20,8 A 2.5 2.5 0 1 1  25 8 z" />
         </G>
-        <Path d="M 17.5,26 L 27.5,26 M 15,30 L 30,30 M 22.5,15.5 L 22.5,20.5 M 20,18 L 25,18" fill="none" stroke="#ffffff" strokeLinejoin="miter" />
+        <Path
+          d="M 17.5,26 L 27.5,26 M 15,30 L 30,30 M 22.5,15.5 L 22.5,20.5 M 20,18 L 25,18"
+          fill="none"
+          stroke={team === ChessPieceTeam.BLACK ? '#ffffff' : strokeColor}
+          strokeLinejoin="miter"
+        />
       </G>
     </Svg>
   );
 }
-

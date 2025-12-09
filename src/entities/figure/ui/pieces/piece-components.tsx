@@ -1,40 +1,27 @@
 import { ComponentType } from 'react';
-import { ChessPieceTeam, ChessPieceType } from '@/shared/types/';
-import {
-  WhiteKing,
-  WhiteQueen,
-  WhiteRook,
-  WhiteBishop,
-  WhiteKnight,
-  WhitePawn,
-  BlackKing,
-  BlackQueen,
-  BlackRook,
-  BlackBishop,
-  BlackKnight,
-  BlackPawn,
-} from './index';
+import { ChessPieceTeam, ChessPieceType, ISvgProps } from '@/shared';
+import { King } from './king';
+import { Queen } from './queen';
+import { Rook } from './rook';
+import { Bishop } from './bishop';
+import { Knight } from './knight';
+import { Pawn } from './pawn';
 
-interface PieceComponentProps {
-  width?: number | string;
-  height?: number | string;
-}
-
-export const pieceComponents: Record<ChessPieceTeam, Record<ChessPieceType, ComponentType<PieceComponentProps>>> = {
+export const pieceComponents: Record<ChessPieceTeam, Record<ChessPieceType, ComponentType<ISvgProps>>> = {
   [ChessPieceTeam.WHITE]: {
-    [ChessPieceType.KING]: WhiteKing,
-    [ChessPieceType.QUEEN]: WhiteQueen,
-    [ChessPieceType.ROOK]: WhiteRook,
-    [ChessPieceType.BISHOP]: WhiteBishop,
-    [ChessPieceType.KNIGHT]: WhiteKnight,
-    [ChessPieceType.PAWN]: WhitePawn,
+    [ChessPieceType.KING]: King,
+    [ChessPieceType.QUEEN]: Queen,
+    [ChessPieceType.ROOK]: Rook,
+    [ChessPieceType.BISHOP]: Bishop,
+    [ChessPieceType.KNIGHT]: Knight,
+    [ChessPieceType.PAWN]: Pawn,
   },
   [ChessPieceTeam.BLACK]: {
-    [ChessPieceType.KING]: BlackKing,
-    [ChessPieceType.QUEEN]: BlackQueen,
-    [ChessPieceType.ROOK]: BlackRook,
-    [ChessPieceType.BISHOP]: BlackBishop,
-    [ChessPieceType.KNIGHT]: BlackKnight,
-    [ChessPieceType.PAWN]: BlackPawn,
+    [ChessPieceType.KING]: King,
+    [ChessPieceType.QUEEN]: Queen,
+    [ChessPieceType.ROOK]: Rook,
+    [ChessPieceType.BISHOP]: Bishop,
+    [ChessPieceType.KNIGHT]: Knight,
+    [ChessPieceType.PAWN]: Pawn,
   },
 };

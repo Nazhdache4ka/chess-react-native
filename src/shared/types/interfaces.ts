@@ -39,3 +39,9 @@ export const GamePhase = {
 } as const;
 
 export type GamePhase = (typeof GamePhase)[keyof typeof GamePhase];
+
+export interface ISvgProps {
+  width?: number | string;
+  height?: number | string;
+  team?: ChessPieceTeam;
+}
