@@ -22,9 +22,9 @@ export function ModalSettings() {
             <ModalCompound.ModalCloseButton />
           </ModalCompound.ModalHeader>
           <ModalCompound.ModalBody>
-            <Button onPress={() => handleSetTimeMinute(60)}>1 min.</Button>
-            <Button onPress={() => handleSetTimeMinute(180)}>3 min.</Button>
-            <Button onPress={() => handleSetTimeMinute(600)}>10 min.</Button>
+            <Button onPress={() => handleSetTimeMinute(60)}>1 min</Button>
+            <Button onPress={() => handleSetTimeMinute(180)}>3 min</Button>
+            <Button onPress={() => handleSetTimeMinute(600)}>10 min</Button>
           </ModalCompound.ModalBody>
         </ModalCompound.ModalContent>
       </ModalCompound.ModalContainer>
