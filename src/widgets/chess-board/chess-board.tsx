@@ -1,9 +1,23 @@
-import { GameBoard, GameInfo } from '@/features';
+import { View, StyleSheet } from 'react-native';
+import { GameBoard, GameInfo, GameSettings } from '@/features';
+import { GamePhaseManager } from './game-phase-manager';
 
 export function ChessBoard() {
   return (
-    <GameInfo>
-      <GameBoard />
-    </GameInfo>
+    <View style={styles.container}>
+      <GameSettings />
+      <GameInfo>
+        <GameBoard />
+      </GameInfo>
+      <GamePhaseManager />
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingTop: 40,
+  },
+});

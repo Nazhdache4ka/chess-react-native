@@ -35,7 +35,10 @@ export function Board({ elements, highlightedElements, handleClick }: BoardProps
 const styles = StyleSheet.create({
   board: {
     width: '100%',
-    height: '45%',
+    aspectRatio: 1,
+    maxWidth: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   row: {
     flex: 1,

@@ -1,12 +1,12 @@
-import { ChessPieceTeam, useGameStore, useGameInfoStore } from '@/shared';
+import { ChessPieceTeam, useGameStore, useGameInfoStore, GamePhase } from '@/shared';
 import { useEffect } from 'react';
 
 export function useGameTime() {
-  const { whiteTime, blackTime, setWhiteTime, setBlackTime } = useGameInfoStore();
+  const { whiteTime, blackTime, phase, setWhiteTime, setBlackTime } = useGameInfoStore();
   const { isCheckmate, currentPlayer } = useGameStore();
 
   useEffect(() => {
-    if (isCheckmate) {
+    if (isCheckmate || phase !== GamePhase.ONGOING) {
       return;
     }
 
@@ -19,7 +19,7 @@ export function useGameTime() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [currentPlayer, isCheckmate, whiteTime, blackTime, setWhiteTime, setBlackTime]);
+  }, [currentPlayer, isCheckmate, whiteTime, blackTime, phase, setWhiteTime, setBlackTime]);
 
   return {
     whiteTime,

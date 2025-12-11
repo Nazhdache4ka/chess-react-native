@@ -1,27 +1,30 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { IChessPiece } from '@/shared/types/';
-import { getChessPieceSymbol } from '../lib/';
+import { pieceComponents } from './pieces/piece-components';
 
 interface PieceProps {
   value: IChessPiece | null;
 }
 
 export function Piece({ value }: PieceProps) {
-  const pieceSymbol = getChessPieceSymbol(value);
+  if (!value) {
+    return null;
+  }
+
+  const PieceComponent = pieceComponents[value.team][value.type];
 
   return (
     <View style={styles.pieceContainer}>
-      <Text style={styles.piece}>{pieceSymbol}</Text>
+      <PieceComponent
+        width="100%"
+        height="100%"
+        team={value.team}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  piece: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-
   pieceContainer: {
     width: '100%',
     height: '100%',
