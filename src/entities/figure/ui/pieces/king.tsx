@@ -2,8 +2,8 @@ import React from 'react';
 import Svg, { G, Path } from 'react-native-svg';
 import { ISvgProps, ChessPieceTeam } from '@/shared';
 
-export function King({ width = 45, height = 45, team }: ISvgProps) {
-  const fillColor = team === ChessPieceTeam.WHITE ? '#fff' : '#000';
+export function King({ width = 45, height = 45, color }: ISvgProps) {
+  const fillColor = color === ChessPieceTeam.WHITE ? '#fff' : '#000';
   const strokeColor = '#000';
 
   return (
@@ -36,7 +36,7 @@ export function King({ width = 45, height = 45, team }: ISvgProps) {
           d="M12.5 37c5.5 3.5 14.5 3.5 20 0v-7s9-4.5 6-10.5c-4-6.5-13.5-3.5-16 4V27v-3.5c-2.5-7.5-12-10.5-16-4-3 6 6 10.5 6 10.5v7"
         />
         <Path d="M12.5 30c5.5-3 14.5-3 20 0m-20 3.5c5.5-3 14.5-3 20 0m-20 3.5c5.5-3 14.5-3 20 0" />
-        {team === ChessPieceTeam.BLACK && (
+        {color === ChessPieceTeam.BLACK && (
           <>
             <Path
               fill="none"

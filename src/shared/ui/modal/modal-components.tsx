@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { useModalContext } from './modal-context';
-import { Modal, Pressable, View, StyleSheet } from 'react-native';
+import { Modal, Pressable, View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { Button } from '../button';
 
 export function ModalRoot({ children }: PropsWithChildren) {
@@ -18,12 +18,12 @@ export function ModalRoot({ children }: PropsWithChildren) {
 }
 
 export function ModalOverlay() {
-  const { isOpen, setIsOpen } = useModalContext();
+  const { isOpen, setOpen } = useModalContext();
 
   if (!isOpen) return null;
 
   const handlePress = () => {
-    setIsOpen(false);
+    setOpen(false);
   };
 
   return (
@@ -50,8 +50,8 @@ export function ModalHeader({ children }: PropsWithChildren) {
   return <View style={styles.header}>{children}</View>;
 }
 
-export function ModalBody({ children }: PropsWithChildren) {
-  return <View style={styles.body}>{children}</View>;
+export function ModalBody({ children, style }: PropsWithChildren<{ style?: StyleProp<ViewStyle> }>) {
+  return <View style={[styles.body, style]}>{children}</View>;
 }
 
 export function ModalFooter({ children }: PropsWithChildren) {
@@ -59,20 +59,20 @@ export function ModalFooter({ children }: PropsWithChildren) {
 }
 
 export function ModalCloseButton() {
-  const { setIsOpen } = useModalContext();
+  const { setOpen } = useModalContext();
 
   const handlePress = () => {
-    setIsOpen(false);
+    setOpen(false);
   };
 
   return <Button onPress={handlePress}>✕</Button>;
 }
 
 export function ModalTrigger({ children, disabled }: PropsWithChildren<{ disabled?: boolean }>) {
-  const { setIsOpen } = useModalContext();
+  const { setOpen } = useModalContext();
 
   const handlePress = () => {
-    setIsOpen(true);
+    setOpen(true);
   };
 
   return (

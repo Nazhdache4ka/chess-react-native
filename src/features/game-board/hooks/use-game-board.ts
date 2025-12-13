@@ -6,7 +6,8 @@ import { checkIsKingChecked, checkIfCheckmate } from '../lib';
 
 export function useGameBoard() {
   const { elements, currentPlayer, setElements, setIsKingChecked, setIsCheckmate } = useGameStore();
-  const { selectedElement, highlightedElements, handleClick } = useChessClickHandler();
+  const { selectedElement, highlightedElements, modalVisible, handleClick, handlePawnPromotion, handleClosePromotion } =
+    useChessClickHandler();
 
   useEffect(() => {
     setElements(fillChessBoard(getInitialElements()));
@@ -22,6 +23,9 @@ export function useGameBoard() {
     elements,
     highlightedElements,
     selectedElement,
+    modalVisible,
     handleClick,
+    handlePawnPromotion,
+    handleClosePromotion,
   };
 }

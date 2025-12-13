@@ -18,7 +18,7 @@ export function Piece({ value }: PieceProps) {
       <PieceComponent
         width="100%"
         height="100%"
-        team={value.team}
+        color={value.team}
       />
     </View>
   );
