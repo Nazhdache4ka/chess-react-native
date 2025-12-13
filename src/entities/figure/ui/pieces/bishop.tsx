@@ -2,8 +2,8 @@ import React from 'react';
 import Svg, { G, Path } from 'react-native-svg';
 import { ChessPieceTeam, ISvgProps } from '@/shared';
 
-export function Bishop({ width = 45, height = 45, team }: ISvgProps) {
-  const fillColor = team === ChessPieceTeam.WHITE ? '#fff' : '#000';
+export function Bishop({ width = 45, height = 45, color }: ISvgProps) {
+  const fillColor = color === ChessPieceTeam.WHITE ? '#fff' : '#000';
   const strokeColor = '#000';
 
   return (
@@ -38,7 +38,7 @@ export function Bishop({ width = 45, height = 45, team }: ISvgProps) {
         <Path
           d="M 17.5,26 L 27.5,26 M 15,30 L 30,30 M 22.5,15.5 L 22.5,20.5 M 20,18 L 25,18"
           fill="none"
-          stroke={team === ChessPieceTeam.BLACK ? '#ffffff' : strokeColor}
+          stroke={color === ChessPieceTeam.BLACK ? '#ffffff' : strokeColor}
           strokeLinejoin="miter"
         />
       </G>

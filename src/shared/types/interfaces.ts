@@ -43,5 +43,11 @@ export type GamePhase = (typeof GamePhase)[keyof typeof GamePhase];
 export interface ISvgProps {
   width?: number | string;
   height?: number | string;
-  team?: ChessPieceTeam;
+  color?: ChessPieceTeam;
+}
+
+export interface ITargetPawn {
+  selectedElement: IChessBoardElement;
+  rowIndex: number;
+  colIndex: number;
 }

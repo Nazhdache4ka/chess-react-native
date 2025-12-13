@@ -10,13 +10,16 @@ import {
   useGameInfoStore,
 } from '@/shared';
 import { useHighlightedElements } from './use-highlighted-elements';
+import { usePawnPromotion } from './use-pawn-promotion';
 import { moveHandler, possibleCheckAfterMoveValidation } from '../lib';
+import { isPawnToBePromoted } from '../lib/pawn-promotion';
 
 export function useChessClickHandler() {
+  const [selectedElement, setSelectedElement] = useState<IChessBoardElement | null>(null);
   const { elements, currentPlayer, setElements, setCurrentPlayer } = useGameStore();
   const phase = useGameInfoStore((state) => state.phase);
-  const [selectedElement, setSelectedElement] = useState<IChessBoardElement | null>(null);
   const highlightedElements = useHighlightedElements(selectedElement, elements);
+  const { modalVisible, setTargetPawn, handlePawnPromotion, handleClosePromotion } = usePawnPromotion();
 
   const handleClick = useCallback(
     (rowIndex: number, colIndex: number, element: IChessBoardElement) => {
@@ -41,6 +44,12 @@ export function useChessClickHandler() {
             onIllegalMoveVib();
             return;
           }
+          if (isPawnToBePromoted(selectedElement, rowIndex)) {
+            setTargetPawn({ selectedElement, rowIndex, colIndex }); // сюда передается выбранная пешка + коорды куда она переместится; сделал так, чтобы в handlePawnPromotion они были доступны
+            setSelectedElement(null);
+            onRegularMoveVib();
+            return;
+          }
           const newElements = moveHandler(elements, selectedElement, rowIndex, colIndex);
           if (newElements) {
             setElements(newElements);
@@ -57,12 +66,15 @@ export function useChessClickHandler() {
         }
       }
     },
-    [phase, selectedElement, currentPlayer, highlightedElements, elements, setCurrentPlayer, setElements]
+    [phase, selectedElement, currentPlayer, highlightedElements, elements, setCurrentPlayer, setElements, setTargetPawn]
   );
 
   return {
     selectedElement,
     highlightedElements,
+    modalVisible,
     handleClick,
+    handlePawnPromotion,
+    handleClosePromotion,
   };
 }

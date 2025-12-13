@@ -2,8 +2,8 @@ import React from 'react';
 import Svg, { Path } from 'react-native-svg';
 import { ISvgProps, ChessPieceTeam } from '@/shared';
 
-export function Pawn({ width = 45, height = 45, team }: ISvgProps) {
-  const fillColor = team === ChessPieceTeam.WHITE ? '#fff' : '#000';
+export function Pawn({ width = 45, height = 45, color }: ISvgProps) {
+  const fillColor = color === ChessPieceTeam.WHITE ? '#fff' : '#000';
   const strokeColor = '#000';
 
   return (

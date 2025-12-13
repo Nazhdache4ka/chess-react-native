@@ -2,8 +2,8 @@ import React from 'react';
 import Svg, { G, Path } from 'react-native-svg';
 import { ISvgProps, ChessPieceTeam } from '@/shared';
 
-export function Knight({ width = 45, height = 45, team }: ISvgProps) {
-  const fillColor = team === ChessPieceTeam.WHITE ? '#fff' : '#000';
+export function Knight({ width = 45, height = 45, color }: ISvgProps) {
+  const fillColor = color === ChessPieceTeam.WHITE ? '#fff' : '#000';
   const strokeColor = '#000';
 
   return (
@@ -38,16 +38,16 @@ export function Knight({ width = 45, height = 45, team }: ISvgProps) {
         />
         <Path
           d="M 9.5 25.5 A 0.5 0.5 0 1 1 8.5,25.5 A 0.5 0.5 0 1 1 9.5 25.5 z"
-          fill={team === ChessPieceTeam.BLACK ? '#ffffff' : fillColor}
-          stroke={team === ChessPieceTeam.BLACK ? '#ffffff' : strokeColor}
+          fill={color === ChessPieceTeam.BLACK ? '#ffffff' : fillColor}
+          stroke={color === ChessPieceTeam.BLACK ? '#ffffff' : strokeColor}
         />
         <Path
           d="M 15 15.5 A 0.5 1.5 0 1 1  14,15.5 A 0.5 1.5 0 1 1  15 15.5 z"
           transform="matrix(0.866,0.5,-0.5,0.866,9.693,-5.173)"
-          fill={team === ChessPieceTeam.BLACK ? '#ffffff' : fillColor}
-          stroke={team === ChessPieceTeam.BLACK ? '#ffffff' : strokeColor}
+          fill={color === ChessPieceTeam.BLACK ? '#ffffff' : fillColor}
+          stroke={color === ChessPieceTeam.BLACK ? '#ffffff' : strokeColor}
         />
-        {team === ChessPieceTeam.BLACK && (
+        {color === ChessPieceTeam.BLACK && (
           <Path
             d="M 24.55,10.4 L 24.1,11.85 L 24.6,12 C 27.75,13 30.25,14.49 32.5,18.75 C 34.75,23.01 35.75,29.06 35.25,39 L 35.2,39.5 L 37.45,39.5 L 37.5,39 C 38,28.94 36.62,22.15 34.25,17.66 C 31.88,13.17 28.46,11.02 25.06,10.5 L 24.55,10.4 z"
             fill="#ffffff"

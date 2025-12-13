@@ -1,14 +1,6 @@
 import { View, StyleSheet, Text } from 'react-native';
 import { ModalSettings } from './components';
-import {
-  ChessPieceTeam,
-  GamePhase,
-  useGameInfoStore,
-  useGameStore,
-  Button,
-  ModalCompoundProvider,
-  ModalCompound,
-} from '@/shared';
+import { ChessPieceTeam, GamePhase, useGameInfoStore, useGameStore, Button, ModalCompound } from '@/shared';
 import { fillChessBoard, getInitialElements } from '@/entities/board';
 
 export function GameSettings() {
@@ -33,27 +25,25 @@ export function GameSettings() {
     setIsCheckmate(false);
   };
   return (
-    <ModalCompoundProvider>
-      <View style={styles.container}>
-        <Button
-          onPress={handleStart}
-          disabled={phase !== GamePhase.PAUSE}
-        >
-          Start
-        </Button>
-        <Button
-          onPress={handlePause}
-          disabled={phase !== GamePhase.ONGOING}
-        >
-          Pause
-        </Button>
-        <Button onPress={handleRestart}>Restart</Button>
-        <ModalCompound.ModalTrigger disabled={phase !== GamePhase.PAUSE}>
-          <Text style={styles.triggerContent}>⚙</Text>
-        </ModalCompound.ModalTrigger>
-        <ModalSettings />
-      </View>
-    </ModalCompoundProvider>
+    <View style={styles.container}>
+      <Button
+        onPress={handleStart}
+        disabled={phase !== GamePhase.PAUSE}
+      >
+        Start
+      </Button>
+      <Button
+        onPress={handlePause}
+        disabled={phase !== GamePhase.ONGOING}
+      >
+        Pause
+      </Button>
+      <Button onPress={handleRestart}>Restart</Button>
+      <ModalCompound.ModalTrigger disabled={phase !== GamePhase.PAUSE}>
+        <Text style={styles.triggerContent}>⚙</Text>
+      </ModalCompound.ModalTrigger>
+      <ModalSettings />
+    </View>
   );
 }
 
