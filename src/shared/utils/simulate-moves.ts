@@ -1,6 +1,7 @@
 import { IChessBoardElement } from '../types';
 import { MAX_COL, MAX_ROW, MIN_COL, MIN_ROW } from '../models';
 import { getCoordinatesFromId } from './get-coordinates-from-id';
+import { getShallowElements } from './get-shallow-elements';
 
 export function simulateMoves(
   elements: IChessBoardElement[][],
@@ -18,9 +19,7 @@ export function simulateMoves(
     return;
   }
 
-  const newElements = elements.map((row: IChessBoardElement[]) =>
-    row.map((element: IChessBoardElement) => ({ ...element }))
-  );
+  const newElements = getShallowElements(elements);
 
   const newElement = newElements[selectedElementRow][selectedElementCol].value;
   newElements[rowIndex][colIndex].value = newElement;

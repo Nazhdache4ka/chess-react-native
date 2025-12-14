@@ -1,4 +1,11 @@
-import { ChessPieceType, IChessBoardElement, getCoordinatesFromId, simulateMoves, ITargetPawn } from '@/shared';
+import {
+  ChessPieceType,
+  IChessBoardElement,
+  getCoordinatesFromId,
+  simulateMoves,
+  ITargetPawn,
+  getShallowElements,
+} from '@/shared';
 
 export function promotePawn(
   elements: IChessBoardElement[][],
@@ -15,7 +22,7 @@ export function promotePawn(
 
   const { row, col } = getCoordinatesFromId(targetPawn.selectedElement.id);
 
-  const newElements = elements.map((row) => row.map((element) => ({ ...element })));
+  const newElements = getShallowElements(elements);
 
   const newElement = newElements[row][col];
 

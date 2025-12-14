@@ -1,7 +1,6 @@
 import { useCallback, useState, useEffect } from 'react';
-import { ChessPieceTeam, ChessPieceType, ITargetPawn } from '@/shared/types';
-import { promotePawn } from '../lib/pawn-promotion';
-import { useGameStore } from '@/shared/store/use-game-store';
+import { ChessPieceTeam, ChessPieceType, ITargetPawn, useGameStore } from '@/shared';
+import { promotePawn } from '../lib';
 
 export function usePawnPromotion() {
   const [targetPawn, setTargetPawn] = useState<ITargetPawn | null>(null);
