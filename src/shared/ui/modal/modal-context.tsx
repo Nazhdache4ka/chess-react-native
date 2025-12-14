@@ -1,8 +1,8 @@
-import { createContext, PropsWithChildren, useContext, useMemo, useState } from 'react';
+import { createContext, useContext, useMemo, useState, useCallback } from 'react';
 
 type ModalContextType = {
   isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+  setOpen: (isOpen: boolean) => void;
 };
 
 export const ModalCompoundContext = createContext<ModalContextType | null>(null);
@@ -17,10 +17,30 @@ export const useModalContext = () => {
   return context;
 };
 
-export function ModalCompoundProvider({ children }: PropsWithChildren) {
-  const [isOpen, setIsOpen] = useState(false);
+interface ModalCompoundProviderProps {
+  children: React.ReactNode;
+  isControlledOpen?: boolean;
+  onOpenChange?: (isOpen: boolean) => void;
+}
 
-  const contextValue = useMemo(() => ({ isOpen, setIsOpen }), [isOpen, setIsOpen]);
+export function ModalCompoundProvider({ children, isControlledOpen, onOpenChange }: ModalCompoundProviderProps) {
+  const [internalOpen, setInternalOpen] = useState(false);
+
+  const isControlled = isControlledOpen !== undefined;
+  const isOpen = isControlled ? isControlledOpen ?? false : internalOpen;
+
+  const setOpen = useCallback(
+    (isOpen: boolean) => {
+      if (isControlled) {
+        onOpenChange?.(isOpen);
+      } else {
+        setInternalOpen(isOpen);
+      }
+    },
+    [isControlled, onOpenChange]
+  );
+
+  const contextValue = useMemo(() => ({ isOpen, setOpen }), [isOpen, setOpen]);
 
   return <ModalCompoundContext.Provider value={contextValue}>{children}</ModalCompoundContext.Provider>;
 }
