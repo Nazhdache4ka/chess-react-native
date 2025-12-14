@@ -1,11 +1,19 @@
 import { View, StyleSheet, Text } from 'react-native';
 import { ModalSettings } from './components';
-import { ChessPieceTeam, GamePhase, useGameInfoStore, useGameStore, Button, ModalCompound } from '@/shared';
+import {
+  ChessPieceTeam,
+  GamePhase,
+  useGameInfoStore,
+  useGameStore,
+  Button,
+  ModalCompound,
+  getInitialCastleRights,
+} from '@/shared';
 import { fillChessBoard, getInitialElements } from '@/entities/board';
 
 export function GameSettings() {
   const { phase, setPhase, setWhiteTime, setBlackTime } = useGameInfoStore();
-  const { setElements, setCurrentPlayer, setIsKingChecked, setIsCheckmate } = useGameStore();
+  const { setElements, setCurrentPlayer, setIsKingChecked, setIsCheckmate, setCastleRights } = useGameStore();
 
   const handleStart = () => {
     setPhase(GamePhase.START);
@@ -23,7 +31,9 @@ export function GameSettings() {
     setBlackTime(60);
     setIsKingChecked(false);
     setIsCheckmate(false);
+    setCastleRights(getInitialCastleRights());
   };
+
   return (
     <View style={styles.container}>
       <Button
