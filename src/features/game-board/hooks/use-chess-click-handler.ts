@@ -11,7 +11,7 @@ import {
 } from '@/shared';
 import { useHighlightedElements } from './use-highlighted-elements';
 import { usePawnPromotion } from './use-pawn-promotion';
-import { moveHandler, possibleCheckAfterMoveValidation, setRights } from '../lib';
+import { moveHandler, possibleCheckAfterMoveValidation, getCastleRights } from '../lib';
 import { isPawnToBePromoted } from '../lib/pawn-promotion';
 
 export function useChessClickHandler() {
@@ -54,7 +54,7 @@ export function useChessClickHandler() {
           if (newElements) {
             setElements(newElements);
           }
-          const updatedCastleRights = setRights(selectedElement, rowIndex, colIndex, castleRights);
+          const updatedCastleRights = getCastleRights(selectedElement, rowIndex, colIndex, castleRights);
           if (updatedCastleRights) {
             setCastleRights(updatedCastleRights);
           }

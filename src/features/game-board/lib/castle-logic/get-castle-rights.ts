@@ -9,7 +9,7 @@ import {
   MIN_ROW,
 } from '@/shared';
 
-export function setRights(
+export function getCastleRights(
   element: IChessBoardElement,
   rowIndex: number,
   colIndex: number,
