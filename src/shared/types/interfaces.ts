@@ -51,3 +51,14 @@ export interface ITargetPawn {
   rowIndex: number;
   colIndex: number;
 }
+
+export interface ICastleInfo {
+  hasKingMoved: boolean;
+  hasRookKingSideMoved: boolean;
+  hasRookQueenSideMoved: boolean;
+}
+
+export interface ICastleRights {
+  white: ICastleInfo;
+  black: ICastleInfo;
+}

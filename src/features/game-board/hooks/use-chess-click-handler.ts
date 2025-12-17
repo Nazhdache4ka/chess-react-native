@@ -11,12 +11,12 @@ import {
 } from '@/shared';
 import { useHighlightedElements } from './use-highlighted-elements';
 import { usePawnPromotion } from './use-pawn-promotion';
-import { moveHandler, possibleCheckAfterMoveValidation } from '../lib';
+import { moveHandler, possibleCheckAfterMoveValidation, getCastleRights } from '../lib';
 import { isPawnToBePromoted } from '../lib/pawn-promotion';
 
 export function useChessClickHandler() {
   const [selectedElement, setSelectedElement] = useState<IChessBoardElement | null>(null);
-  const { elements, currentPlayer, setElements, setCurrentPlayer } = useGameStore();
+  const { elements, currentPlayer, castleRights, setElements, setCurrentPlayer, setCastleRights } = useGameStore();
   const phase = useGameInfoStore((state) => state.phase);
   const highlightedElements = useHighlightedElements(selectedElement, elements);
   const { modalVisible, setTargetPawn, handlePawnPromotion, handleClosePromotion } = usePawnPromotion();
@@ -50,9 +50,13 @@ export function useChessClickHandler() {
             onRegularMoveVib();
             return;
           }
-          const newElements = moveHandler(elements, selectedElement, rowIndex, colIndex);
+          const newElements = moveHandler(elements, selectedElement, rowIndex, colIndex, castleRights);
           if (newElements) {
             setElements(newElements);
+          }
+          const updatedCastleRights = getCastleRights(selectedElement, rowIndex, colIndex, castleRights);
+          if (updatedCastleRights) {
+            setCastleRights(updatedCastleRights);
           }
           setCurrentPlayer(currentPlayer === ChessPieceTeam.WHITE ? ChessPieceTeam.BLACK : ChessPieceTeam.WHITE);
           onRegularMoveVib();
@@ -66,7 +70,18 @@ export function useChessClickHandler() {
         }
       }
     },
-    [phase, selectedElement, currentPlayer, highlightedElements, elements, setCurrentPlayer, setElements, setTargetPawn]
+    [
+      phase,
+      selectedElement,
+      currentPlayer,
+      highlightedElements,
+      elements,
+      castleRights,
+      setCurrentPlayer,
+      setElements,
+      setTargetPawn,
+      setCastleRights,
+    ]
   );
 
   return {
