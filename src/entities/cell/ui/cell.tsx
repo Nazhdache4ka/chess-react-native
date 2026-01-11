@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: 'black',
+    aspectRatio: 1,
   },
 
   highlighted: {

@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import LottieView from 'lottie-react-native';
+import Lottie from 'lottie-react';
+import animationData from './assets/animation.json';
 import { GamePhase, useGameInfoStore } from '@/shared';
 
 export function LottieStart() {
@@ -26,6 +28,18 @@ export function LottieStart() {
   const onComplete = () => {
     setPhase(GamePhase.ONGOING);
   };
+
+  if (Platform.OS === 'web') {
+    return isVisible ? (
+      <View style={styles.container}>
+        <Lottie
+          animationData={animationData}
+          loop={false}
+          onComplete={onComplete}
+        />
+      </View>
+    ) : null;
+  }
 
   return (
     <View style={styles.container}>
