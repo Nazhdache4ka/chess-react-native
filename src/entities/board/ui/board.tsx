@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import { Cell } from '@/entities/cell/';
 import { IChessBoardElement, IChessPieceMovement } from '@/shared/types/';
 
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   board: {
     width: '100%',
     aspectRatio: 1,
-    maxWidth: '100%',
+    maxWidth: Platform.OS === 'web' ? 1500 : '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -1,4 +1,4 @@
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, Platform } from 'react-native';
 import { Button, useGameInfoStore, ModalCompound, useModalContext } from '@/shared';
 
 export function ModalSettings() {
@@ -34,7 +34,7 @@ export function ModalSettings() {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 20,
+    fontSize: Platform.OS === 'web' ? 40 : 20,
     fontWeight: 'bold',
   },
   closeButton: {

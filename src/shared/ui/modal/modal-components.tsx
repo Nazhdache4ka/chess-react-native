@@ -1,6 +1,6 @@
+import { Modal, Pressable, View, StyleSheet, StyleProp, ViewStyle, Platform } from 'react-native';
 import { PropsWithChildren } from 'react';
 import { useModalContext } from './modal-context';
-import { Modal, Pressable, View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { Button } from '../button';
 
 export function ModalRoot({ children }: PropsWithChildren) {
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 20,
     width: '80%',
-    maxWidth: 400,
+    maxWidth: Platform.OS === 'web' ? 800 : 400,
   },
 
   header: {
@@ -117,6 +117,8 @@ const styles = StyleSheet.create({
   },
 
   body: {
+    justifyContent: Platform.OS === 'web' ? 'center' : undefined,
+    alignItems: Platform.OS === 'web' ? 'center' : undefined,
     gap: 10,
   },
 
