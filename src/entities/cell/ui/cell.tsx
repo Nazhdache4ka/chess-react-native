@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { getCellColor } from '../lib/';
 import { IChessBoardElement, IChessPieceMovement } from '@/shared/types/';
 import { Piece } from '@/entities/figure/';
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: Platform.OS === 'web' ? 4 : 1,
+    borderWidth: 1,
     borderColor: 'black',
     aspectRatio: 1,
   },

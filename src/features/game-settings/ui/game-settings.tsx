@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, Platform } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { ModalSettings } from './components';
 import {
   ChessPieceTeam,
@@ -69,13 +69,9 @@ const styles = StyleSheet.create({
   },
 
   triggerContent: {
-    padding: Platform.select({
-      web: 15,
-      default: 10,
-    }),
-    fontSize: Platform.select({
-      web: 58,
-      default: 16,
-    }),
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 5,
+    padding: 10,
   },
 });

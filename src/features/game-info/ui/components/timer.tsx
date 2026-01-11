@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Platform } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { useGameTime } from '../../hooks';
 import { getConvertedTime } from '../../lib';
 import { ChessPieceTeam, useGameStore } from '@/shared';
@@ -36,22 +36,14 @@ export function Timer({ currentTeam }: TimerProps) {
 
 const styles = StyleSheet.create({
   timerContainer: {
-    padding: Platform.select({
-      web: 20,
-      default: 10,
-    }),
-    borderRadius: Platform.OS === 'web' ? 25 : 10,
+    padding: 10,
+    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    width: Platform.OS === 'web' ? 150 : 'auto',
-    height: Platform.OS === 'web' ? 150 : 'auto',
   },
 
   timerText: {
-    fontSize: Platform.select({
-      web: 48,
-      default: 24,
-    }),
+    fontSize: 24,
     fontWeight: 'bold',
   },
   currentPlayer: {

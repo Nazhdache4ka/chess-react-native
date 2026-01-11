@@ -1,4 +1,4 @@
-import { Pressable, Text, StyleSheet, Platform } from 'react-native';
+import { Pressable, Text, StyleSheet } from 'react-native';
 
 interface ButtonProps {
   disabled?: boolean;
@@ -20,29 +20,18 @@ export function Button({ disabled, children, onPress }: ButtonProps) {
 
 const styles = StyleSheet.create({
   button: {
-    padding: Platform.select({
-      web: 15,
-      default: 10,
-    }),
+    padding: 10,
     borderColor: 'black',
     borderWidth: 1,
-    width: Platform.OS === 'web' ? 300 : 'auto',
-    height: Platform.OS === 'web' ? 100 : 'auto',
-    borderRadius: Platform.OS === 'web' ? 15 : 5,
+    borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'transparent',
-    margin: Platform.select({
-      web: 15,
-      default: 10,
-    }),
+    margin: 10,
   },
 
   buttonText: {
-    fontSize: Platform.select({
-      web: 36,
-      default: 16,
-    }),
+    fontSize: 16,
     fontWeight: 'bold',
     color: 'black',
   },
