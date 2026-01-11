@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import { Cell } from '@/entities/cell/';
 import { IChessBoardElement, IChessPieceMovement } from '@/shared/types/';
 
@@ -34,11 +34,9 @@ export function Board({ elements, highlightedElements, handleClick }: BoardProps
 
 const styles = StyleSheet.create({
   board: {
-    width: '100%',
+    width: Platform.OS === 'web' ? 600 : '100%',
     aspectRatio: 1,
-    maxWidth: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    maxWidth: Platform.OS === 'web' ? 1500 : '100%',
   },
   row: {
     flex: 1,

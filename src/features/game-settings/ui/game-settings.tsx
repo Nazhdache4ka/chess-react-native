@@ -69,9 +69,6 @@ const styles = StyleSheet.create({
   },
 
   triggerContent: {
-    borderWidth: 1,
-    borderColor: 'black',
-    borderRadius: 5,
     padding: 10,
   },
 });
