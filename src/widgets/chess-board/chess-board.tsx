@@ -1,19 +1,15 @@
 import { View, StyleSheet } from 'react-native';
-import { GameBoard, GameInfo, GameSettings } from '@/features';
+import { GameInfo, GameSettings } from '@/features';
 import { GamePhaseManager } from './game-phase-manager';
-import { ModalCompoundProvider } from '@/shared';
+import { PropsWithChildren } from 'react';
 
-export function ChessBoard() {
+export function ChessBoard({ children }: PropsWithChildren) {
   return (
-    <ModalCompoundProvider>
-      <View style={styles.container}>
-        <GameSettings />
-        <GameInfo>
-          <GameBoard />
-        </GameInfo>
-        <GamePhaseManager />
-      </View>
-    </ModalCompoundProvider>
+    <View style={styles.container}>
+      <GameSettings />
+      <GameInfo>{children}</GameInfo>
+      <GamePhaseManager />
+    </View>
   );
 }
 
@@ -21,6 +17,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 40,
   },
 });

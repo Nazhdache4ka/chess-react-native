@@ -1,9 +1,10 @@
-import { ChessPieceTeam, useGameStore, useGameInfoStore, GamePhase } from '@/shared';
+import { ChessPieceTeam, GamePhase, useStoreContext } from '@/shared';
 import { useEffect } from 'react';
 
 export function useGameTime() {
-  const { whiteTime, blackTime, phase, setWhiteTime, setBlackTime } = useGameInfoStore();
-  const { isCheckmate, currentPlayer } = useGameStore();
+  const { gameInfoStore, gameStore } = useStoreContext();
+  const { whiteTime, blackTime, phase, setWhiteTime, setBlackTime } = gameInfoStore;
+  const { isCheckmate, currentPlayer } = gameStore;
 
   useEffect(() => {
     if (isCheckmate || phase !== GamePhase.ONGOING) {

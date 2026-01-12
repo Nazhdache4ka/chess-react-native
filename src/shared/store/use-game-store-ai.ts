@@ -1,8 +1,8 @@
 import { create } from 'zustand';
-import { IChessBoardElement, ChessPieceTeam, ICastleRights, IGameStore } from '../types';
+import { ChessPieceTeam, ICastleRights, IChessBoardElement, IGameStore } from '../types';
 import { getInitialCastleRights } from '../utils';
 
-export const useGameStore = create<IGameStore>((set) => ({
+export const useGameStoreAi = create<IGameStore>((set) => ({
   elements: [],
   currentPlayer: ChessPieceTeam.WHITE,
   isKingChecked: false,
