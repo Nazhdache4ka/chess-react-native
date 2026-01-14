@@ -3,11 +3,10 @@ import {
   ChessPieceTeam,
   IChessBoardElement,
   IChessPieceMovement,
-  useGameStore,
   onIllegalMoveVib,
   onRegularMoveVib,
   GamePhase,
-  useGameInfoStore,
+  useStoreContext,
 } from '@/shared';
 import { useHighlightedElements } from './use-highlighted-elements';
 import { usePawnPromotion } from './use-pawn-promotion';
@@ -16,8 +15,9 @@ import { isPawnToBePromoted } from '../lib/pawn-promotion';
 
 export function useChessClickHandler() {
   const [selectedElement, setSelectedElement] = useState<IChessBoardElement | null>(null);
-  const { elements, currentPlayer, castleRights, setElements, setCurrentPlayer, setCastleRights } = useGameStore();
-  const phase = useGameInfoStore((state) => state.phase);
+  const { gameStore, gameInfoStore } = useStoreContext();
+  const { elements, currentPlayer, castleRights, setElements, setCurrentPlayer, setCastleRights } = gameStore;
+  const { phase } = gameInfoStore;
   const highlightedElements = useHighlightedElements(selectedElement, elements);
   const { modalVisible, setTargetPawn, handlePawnPromotion, handleClosePromotion } = usePawnPromotion();
 

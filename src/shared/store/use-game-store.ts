@@ -8,9 +8,11 @@ export const useGameStore = create<IGameStore>((set) => ({
   isKingChecked: false,
   isCheckmate: false,
   castleRights: getInitialCastleRights(),
+  isInitialized: false,
   setCastleRights: (castleRights: ICastleRights) => set({ castleRights }),
   setElements: (elements: IChessBoardElement[][]) => set({ elements }),
   setCurrentPlayer: (currentPlayer: ChessPieceTeam) => set({ currentPlayer }),
   setIsKingChecked: (isKingChecked: boolean) => set({ isKingChecked }),
   setIsCheckmate: (isCheckmate: boolean) => set({ isCheckmate }),
+  setIsInitialized: (isInitialized: boolean) => set({ isInitialized }),
 }));

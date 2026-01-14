@@ -76,11 +76,13 @@ export interface IGameStore {
   isKingChecked: boolean;
   isCheckmate: boolean;
   castleRights: ICastleRights;
+  isInitialized: boolean;
   setElements: (elements: IChessBoardElement[][]) => void;
   setCurrentPlayer: (currentPlayer: ChessPieceTeam) => void;
   setIsKingChecked: (isKingChecked: boolean) => void;
   setIsCheckmate: (isCheckmate: boolean) => void;
   setCastleRights: (castleRights: ICastleRights) => void;
+  setIsInitialized: (isInitialized: boolean) => void;
 }
 
 export interface IGameInfoStore {

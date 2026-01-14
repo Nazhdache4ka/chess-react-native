@@ -1,10 +1,10 @@
 import { Text, StyleSheet } from 'react-native';
-import { Button, useGameInfoStore, ModalCompound, useModalContext } from '@/shared';
+import { Button, ModalCompound, useModalContext, useStoreContext } from '@/shared';
 
 export function ModalSettings() {
   const { setOpen } = useModalContext();
-  const setWhiteTime = useGameInfoStore((state) => state.setWhiteTime);
-  const setBlackTime = useGameInfoStore((state) => state.setBlackTime);
+  const { gameInfoStore } = useStoreContext();
+  const { setWhiteTime, setBlackTime } = gameInfoStore;
 
   const handleSetTimeMinute = (time: number) => {
     setWhiteTime(time);

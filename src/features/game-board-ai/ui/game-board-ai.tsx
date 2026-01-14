@@ -1,15 +1,18 @@
 import { View } from 'react-native';
 import { useEffect } from 'react';
 import { Board, fillChessBoard, getInitialElements } from '@/entities/board';
-import { LottieStart, useGameStore } from '@/shared';
+import { LottieStart, useStoreContext } from '@/shared';
 
 export function GameBoardAi() {
-  const { elements, setElements } = useGameStore();
+  const { gameStore } = useStoreContext();
+  const { elements, isInitialized, setElements, setIsInitialized } = gameStore;
 
   useEffect(() => {
-    setElements(fillChessBoard(getInitialElements()));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (!isInitialized && elements.length === 0) {
+      setElements(fillChessBoard(getInitialElements()));
+      setIsInitialized(true);
+    }
+  }, [elements, isInitialized, setElements, setIsInitialized]);
 
   return (
     <View>
