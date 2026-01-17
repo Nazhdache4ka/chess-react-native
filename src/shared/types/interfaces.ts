@@ -14,6 +14,13 @@ export const ChessPieceType = {
   PAWN: 'pawn',
 } as const;
 
+export const NavigationScreen = {
+  AI: 'ai',
+  SINGLE_PLAYER: 'single-player',
+} as const;
+
+export type NavigationScreen = (typeof NavigationScreen)[keyof typeof NavigationScreen];
+
 export type ChessPieceType = (typeof ChessPieceType)[keyof typeof ChessPieceType];
 
 export interface IChessPiece {
@@ -61,4 +68,28 @@ export interface ICastleInfo {
 export interface ICastleRights {
   white: ICastleInfo;
   black: ICastleInfo;
+}
+
+export interface IGameStore {
+  elements: IChessBoardElement[][];
+  currentPlayer: ChessPieceTeam;
+  isKingChecked: boolean;
+  isCheckmate: boolean;
+  castleRights: ICastleRights;
+  isInitialized: boolean;
+  setElements: (elements: IChessBoardElement[][]) => void;
+  setCurrentPlayer: (currentPlayer: ChessPieceTeam) => void;
+  setIsKingChecked: (isKingChecked: boolean) => void;
+  setIsCheckmate: (isCheckmate: boolean) => void;
+  setCastleRights: (castleRights: ICastleRights) => void;
+  setIsInitialized: (isInitialized: boolean) => void;
+}
+
+export interface IGameInfoStore {
+  whiteTime: number;
+  blackTime: number;
+  phase: GamePhase;
+  setWhiteTime: (whiteTime: number) => void;
+  setBlackTime: (blackTime: number) => void;
+  setPhase: (phase: GamePhase) => void;
 }

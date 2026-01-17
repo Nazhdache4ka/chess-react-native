@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { useGameTime } from '../../hooks';
 import { getConvertedTime } from '../../lib';
-import { ChessPieceTeam, useGameStore } from '@/shared';
+import { ChessPieceTeam, useStoreContext } from '@/shared';
 
 interface TimerProps {
   currentTeam: ChessPieceTeam;
@@ -9,7 +9,8 @@ interface TimerProps {
 
 export function Timer({ currentTeam }: TimerProps) {
   const { whiteTime, blackTime } = useGameTime();
-  const { currentPlayer } = useGameStore();
+  const { gameStore } = useStoreContext();
+  const { currentPlayer } = gameStore;
 
   const { whiteTime: convertedWhiteTime, blackTime: convertedBlackTime } = getConvertedTime(whiteTime, blackTime);
 

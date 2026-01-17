@@ -3,11 +3,12 @@ import { View, StyleSheet, Platform } from 'react-native';
 import LottieView from 'lottie-react-native';
 import Lottie from 'lottie-react';
 import animationData from './assets/animation.json';
-import { GamePhase, useGameInfoStore } from '@/shared';
+import { GamePhase, useStoreContext } from '@/shared';
 
 export function LottieStart() {
   const animationRef = useRef<LottieView>(null);
-  const { phase, setPhase } = useGameInfoStore();
+  const { gameInfoStore } = useStoreContext();
+  const { phase, setPhase } = gameInfoStore;
 
   const isVisible = useMemo(() => {
     return phase === GamePhase.START;
