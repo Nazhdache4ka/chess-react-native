@@ -1,8 +1,8 @@
-import { getPossibleMoves } from '@/entities/figure/';
 import { ChessPieceType, IChessBoardElement, useStoreContext, getCastleMoves, validateMove } from '@/shared';
 import { useMemo } from 'react';
+import { getPossibleMoves } from '@/entities/figure';
 
-export function useHighlightedElements(selectedElement: IChessBoardElement | null, elements: IChessBoardElement[][]) {
+export function useHighlightedElementsAi(selectedElement: IChessBoardElement | null, elements: IChessBoardElement[][]) {
   const { gameStore } = useStoreContext();
   const { castleRights, isKingChecked } = gameStore;
 

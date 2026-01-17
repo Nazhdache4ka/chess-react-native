@@ -1,6 +1,5 @@
 import { View } from 'react-native';
-import { LottieStart } from '@/shared';
-import { ModalPromotion } from './modal-promotion';
+import { LottieStart, ModalPromotion } from '@/shared';
 import { Board } from '@/entities/board';
 import { useGameBoard } from '../hooks';
 

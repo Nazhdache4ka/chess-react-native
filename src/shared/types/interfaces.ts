@@ -1,3 +1,5 @@
+import type { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
+
 export const ChessPieceTeam = {
   WHITE: 'white',
   BLACK: 'black',
@@ -38,6 +40,14 @@ export interface IChessPieceMovement {
   col: number;
 }
 
+export interface IPlayerMove {
+  piece: ChessPieceType;
+  from: string;
+  to: string;
+  isPromotion?: boolean;
+  isCastle?: boolean;
+}
+
 export const GamePhase = {
   START: 'start',
   PAUSE: 'pause',
@@ -70,6 +80,14 @@ export interface ICastleRights {
   black: ICastleInfo;
 }
 
+export interface IChatSession {
+  initialize(apiKey: string, systemPrompt: string): void;
+  sendMove(move: string): Promise<string>;
+  reset(): void;
+}
+
+export type ChatSession = ChatCompletionMessageParam[];
+
 export interface IGameStore {
   elements: IChessBoardElement[][];
   currentPlayer: ChessPieceTeam;
@@ -92,4 +110,14 @@ export interface IGameInfoStore {
   setWhiteTime: (whiteTime: number) => void;
   setBlackTime: (blackTime: number) => void;
   setPhase: (phase: GamePhase) => void;
+}
+
+export interface IAiMoveResponse {
+  piece: ChessPieceType;
+  from: string;
+  to: string;
+  castling?: 'kingside' | 'queenside';
+  promotion?: string;
+  check?: boolean;
+  checkmate?: boolean;
 }

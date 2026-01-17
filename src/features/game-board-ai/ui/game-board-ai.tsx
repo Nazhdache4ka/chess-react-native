@@ -1,27 +1,25 @@
 import { View } from 'react-native';
-import { useEffect } from 'react';
-import { Board, fillChessBoard, getInitialElements } from '@/entities/board';
-import { LottieStart, useStoreContext } from '@/shared';
+import { Board } from '@/entities/board';
+import { LottieStart, ModalPromotion } from '@/shared';
+import { useGameBoardAi } from '../hooks';
 
 export function GameBoardAi() {
-  const { gameStore } = useStoreContext();
-  const { elements, isInitialized, setElements, setIsInitialized } = gameStore;
-
-  useEffect(() => {
-    if (!isInitialized && elements.length === 0) {
-      setElements(fillChessBoard(getInitialElements()));
-      setIsInitialized(true);
-    }
-  }, [elements, isInitialized, setElements, setIsInitialized]);
+  const { elements, highlightedElements, modalVisible, handleClick, handlePawnPromotion, handleClosePromotion } =
+    useGameBoardAi();
 
   return (
     <View>
       <Board
         elements={elements}
-        highlightedElements={[]}
-        handleClick={() => {}}
+        highlightedElements={highlightedElements}
+        handleClick={handleClick}
       />
       <LottieStart />
+      <ModalPromotion
+        isOpen={modalVisible}
+        onClose={handleClosePromotion}
+        handleClick={handlePawnPromotion}
+      />
     </View>
   );
 }
