@@ -44,6 +44,8 @@ export interface IPlayerMove {
   piece: ChessPieceType;
   from: string;
   to: string;
+  board: IChessBoardElement[][];
+  team: ChessPieceTeam;
   isPromotion?: boolean;
   isCastle?: boolean;
 }
@@ -83,7 +85,7 @@ export interface ICastleRights {
 export interface IChatSession {
   initialize(apiKey: string, systemPrompt: string): void;
   sendMove(move: string): Promise<string>;
-  reset(): void;
+  destroy(): void;
 }
 
 export type ChatSession = ChatCompletionMessageParam[];

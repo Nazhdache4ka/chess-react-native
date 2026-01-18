@@ -38,25 +38,23 @@ export function useChessClickHandlerAi() {
       return;
     }
 
-    if (aiMove && playerMove) {
-      const moveData = convertAiMove(aiMove, elements);
+    const moveData = convertAiMove(aiMove, elements);
 
-      if (moveData && moveData.selectedElement) {
-        const { selectedElement: aiSelectedElement, rowIndex, colIndex } = moveData;
+    if (moveData && moveData.selectedElement) {
+      const { selectedElement: aiSelectedElement, rowIndex, colIndex } = moveData;
 
-        const newElements = moveHandler(elements, aiSelectedElement, rowIndex, colIndex, castleRights);
-        if (newElements) {
-          setElements(newElements);
-        }
-
-        const updatedCastleRights = getCastleRights(aiSelectedElement, rowIndex, colIndex, castleRights);
-        if (updatedCastleRights) {
-          setCastleRights(updatedCastleRights);
-        }
-        setCurrentPlayer(ChessPieceTeam.WHITE);
-        // eslint-disable-next-line
-        setPlayerMove(null);
+      const newElements = moveHandler(elements, aiSelectedElement, rowIndex, colIndex, castleRights);
+      if (newElements) {
+        setElements(newElements);
       }
+
+      const updatedCastleRights = getCastleRights(aiSelectedElement, rowIndex, colIndex, castleRights);
+      if (updatedCastleRights) {
+        setCastleRights(updatedCastleRights);
+      }
+      setCurrentPlayer(ChessPieceTeam.WHITE);
+      // eslint-disable-next-line
+      setPlayerMove(null);
     }
   }, [aiMove, playerMove, elements, castleRights, setElements, setCastleRights, setCurrentPlayer]);
 
@@ -99,6 +97,8 @@ export function useChessClickHandlerAi() {
             if (selectedElement.value?.type) {
               setPlayerMove({
                 piece: selectedElement.value?.type,
+                board: newElements,
+                team: selectedElement.value?.team,
                 from: convertCoordinates(
                   getCoordinatesFromId(selectedElement.id).row,
                   getCoordinatesFromId(selectedElement.id).col

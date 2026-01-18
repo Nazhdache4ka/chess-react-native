@@ -1,4 +1,4 @@
-import { IAiMoveResponse, IChessBoardElement } from '@/shared';
+import { ChessPieceTeam, IAiMoveResponse, IChessBoardElement, possibleCheckAfterMoveValidation } from '@/shared';
 import { convertNotationToCoordinates } from './convert-coordinates';
 import { validateAiMove } from './vaildate-ai-move';
 
@@ -33,6 +33,16 @@ export function convertAiMove(
     }
 
     if (!selectedElement.value || selectedElement.value.type !== aiMove.piece) {
+      return null;
+    }
+
+    if (selectedElement.value?.team !== ChessPieceTeam.BLACK) {
+      console.error('Error invalid AI move');
+      return null;
+    }
+
+    if (possibleCheckAfterMoveValidation(elements, ChessPieceTeam.BLACK, selectedElement, toCoords.row, toCoords.col)) {
+      console.error('Error: AI stupid and makes move that puts itself in check');
       return null;
     }
 

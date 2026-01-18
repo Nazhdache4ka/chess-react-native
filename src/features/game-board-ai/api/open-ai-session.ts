@@ -27,6 +27,8 @@ export class OpenAiSession implements IChatSession {
     const response = await this.client.chat.completions.create({
       model: MODEL,
       messages: this.messages,
+      response_format: { type: 'json_object' },
+      temperature: 0.1,
     });
 
     if (!response.choices[0].message.content) {
@@ -39,7 +41,7 @@ export class OpenAiSession implements IChatSession {
     return aiResponse;
   }
 
-  public reset(): void {
+  public destroy(): void {
     this.messages = [{ role: 'system', content: this.systemPrompt }];
   }
 }

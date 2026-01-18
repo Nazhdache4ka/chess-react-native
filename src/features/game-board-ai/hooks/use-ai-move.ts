@@ -1,25 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { IAiMoveResponse, IPlayerMove } from '@/shared';
 import { OpenAiSession } from '../api';
 import { systemPrompt } from '../lib';
 import { OPENAI_API_KEY } from '@env';
 
-const openAiSession = new OpenAiSession();
-
 export function useAiMove(playerMove: IPlayerMove | null) {
   const [aiResponse, setAiResponse] = useState<IAiMoveResponse | null>(null);
-  useEffect(() => {
-    openAiSession.initialize(OPENAI_API_KEY, systemPrompt);
+
+  const openAiSession = useMemo(() => {
+    return new OpenAiSession();
   }, []);
 
   useEffect(() => {
-    if (playerMove) {
-      openAiSession.sendMove(JSON.stringify(playerMove)).then((response) => {
-        setAiResponse(JSON.parse(response));
-        console.log(JSON.parse(response));
-      });
+    openAiSession.initialize(OPENAI_API_KEY, systemPrompt);
+  }, [openAiSession]);
+
+  useEffect(() => {
+    if (!playerMove) {
+      return;
     }
-  }, [playerMove]);
+
+    (async () => {
+      const response = await openAiSession.sendMove(JSON.stringify(playerMove));
+      setAiResponse(JSON.parse(response));
+    })();
+  }, [playerMove, openAiSession]);
+
+  useEffect(() => {
+    return () => {
+      openAiSession.destroy();
+    };
+  }, [openAiSession]);
 
   return aiResponse;
 }
