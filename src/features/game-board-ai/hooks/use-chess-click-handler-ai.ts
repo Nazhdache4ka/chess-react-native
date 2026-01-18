@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import {
   ChessPieceTeam,
   IChessBoardElement,
@@ -9,23 +9,62 @@ import {
   useStoreContext,
   possibleCheckAfterMoveValidation,
   getCastleRights,
-  moveHandler,
   isPawnToBePromoted,
+  moveHandler,
+  IPlayerMove,
+  getCoordinatesFromId,
 } from '@/shared';
-import { useHighlightedElements } from './use-highlighted-elements';
-import { usePawnPromotion } from './use-pawn-promotion';
+import { useHighlightedElementsAi } from './use-highlighted-elements-ai';
+import { usePawnPromotionAi } from './use-pawn-promotion-ai';
+import { useAiMove } from './use-ai-move';
+import { convertCoordinates, convertAiMove } from '../lib';
 
-export function useChessClickHandler() {
+export function useChessClickHandlerAi() {
   const [selectedElement, setSelectedElement] = useState<IChessBoardElement | null>(null);
+  const [playerMove, setPlayerMove] = useState<IPlayerMove | null>(null);
   const { gameStore, gameInfoStore } = useStoreContext();
   const { elements, currentPlayer, castleRights, setElements, setCurrentPlayer, setCastleRights } = gameStore;
   const { phase } = gameInfoStore;
-  const highlightedElements = useHighlightedElements(selectedElement, elements);
-  const { modalVisible, setTargetPawn, handlePawnPromotion, handleClosePromotion } = usePawnPromotion();
+  const highlightedElements = useHighlightedElementsAi(selectedElement, elements);
+  const { modalVisible, setTargetPawn, handlePawnPromotion, handleClosePromotion } = usePawnPromotionAi();
+  const aiMove = useAiMove(playerMove);
+
+  useEffect(() => {
+    if (!aiMove) {
+      return;
+    }
+
+    if (!playerMove) {
+      return;
+    }
+
+    const moveData = convertAiMove(aiMove, elements);
+
+    if (moveData && moveData.selectedElement) {
+      const { selectedElement: aiSelectedElement, rowIndex, colIndex } = moveData;
+
+      const newElements = moveHandler(elements, aiSelectedElement, rowIndex, colIndex, castleRights);
+      if (newElements) {
+        setElements(newElements);
+      }
+
+      const updatedCastleRights = getCastleRights(aiSelectedElement, rowIndex, colIndex, castleRights);
+      if (updatedCastleRights) {
+        setCastleRights(updatedCastleRights);
+      }
+      setCurrentPlayer(ChessPieceTeam.WHITE);
+      // eslint-disable-next-line
+      setPlayerMove(null);
+    }
+  }, [aiMove, playerMove, elements, castleRights, setElements, setCastleRights, setCurrentPlayer]);
 
   const handleClick = useCallback(
     (rowIndex: number, colIndex: number, element: IChessBoardElement) => {
       if (phase !== GamePhase.ONGOING) {
+        return;
+      }
+
+      if (currentPlayer === ChessPieceTeam.BLACK) {
         return;
       }
 
@@ -55,6 +94,18 @@ export function useChessClickHandler() {
           const newElements = moveHandler(elements, selectedElement, rowIndex, colIndex, castleRights);
           if (newElements) {
             setElements(newElements);
+            if (selectedElement.value?.type) {
+              setPlayerMove({
+                piece: selectedElement.value?.type,
+                board: newElements,
+                team: selectedElement.value?.team,
+                from: convertCoordinates(
+                  getCoordinatesFromId(selectedElement.id).row,
+                  getCoordinatesFromId(selectedElement.id).col
+                ),
+                to: convertCoordinates(rowIndex, colIndex),
+              });
+            }
           }
           const updatedCastleRights = getCastleRights(selectedElement, rowIndex, colIndex, castleRights);
           if (updatedCastleRights) {

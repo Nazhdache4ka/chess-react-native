@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import { useStoreContext, checkIsKingChecked, checkIfCheckmate } from '@/shared';
 import { fillChessBoard, getInitialElements } from '@/entities/board';
-import { useChessClickHandler } from './use-chess-click-handler';
+import { useChessClickHandlerAi } from './use-chess-click-handler-ai';
 
-export function useGameBoard() {
+export function useGameBoardAi() {
   const { gameStore } = useStoreContext();
   const { elements, currentPlayer, isInitialized, setElements, setIsKingChecked, setIsCheckmate, setIsInitialized } =
     gameStore;
   const { selectedElement, highlightedElements, modalVisible, handleClick, handlePawnPromotion, handleClosePromotion } =
-    useChessClickHandler();
+    useChessClickHandlerAi();
 
   useEffect(() => {
     if (!isInitialized && elements.length === 0) {

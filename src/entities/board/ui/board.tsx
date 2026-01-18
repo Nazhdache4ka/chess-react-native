@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import { Cell } from '@/entities/cell/';
 import { IChessBoardElement, IChessPieceMovement } from '@/shared/types/';
@@ -8,7 +9,7 @@ interface BoardProps {
   handleClick: (rowIndex: number, colIndex: number, element: IChessBoardElement) => void;
 }
 
-export function Board({ elements, highlightedElements, handleClick }: BoardProps) {
+export const Board = memo(function Board({ elements, highlightedElements, handleClick }: BoardProps) {
   return (
     <View style={styles.board}>
       {elements.map((row: IChessBoardElement[], rowIndex: number) => (
@@ -30,7 +31,7 @@ export function Board({ elements, highlightedElements, handleClick }: BoardProps
       ))}
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   board: {

@@ -1,5 +1,6 @@
 import { ComponentType } from 'react';
-import { ChessPieceTeam, ChessPieceType, ISvgProps } from '@/shared';
+import { ChessPieceTeam, ChessPieceType } from '@/shared/types';
+import { ISvgProps } from '@/shared';
 import { King } from './king';
 import { Queen } from './queen';
 import { Rook } from './rook';

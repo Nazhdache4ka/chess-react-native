@@ -1,4 +1,4 @@
-import { Button, ChessPieceType, ModalCompound, ModalCompoundProvider, useGameStore } from '@/shared';
+import { Button, ChessPieceType, ModalCompound, ModalCompoundProvider, useStoreContext } from '@/shared';
 import { Text, StyleSheet } from 'react-native';
 import { Queen, Rook, Bishop, Knight } from '@/entities/figure';
 
@@ -9,7 +9,9 @@ interface ModalPromotionProps {
 }
 
 export function ModalPromotion({ isOpen, onClose, handleClick }: ModalPromotionProps) {
-  const color = useGameStore((state) => state.currentPlayer);
+  const { gameStore } = useStoreContext();
+  const { currentPlayer } = gameStore;
+  const color = currentPlayer;
   if (!isOpen) return null;
 
   return (
