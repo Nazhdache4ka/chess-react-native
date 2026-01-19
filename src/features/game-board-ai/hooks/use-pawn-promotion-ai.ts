@@ -1,7 +1,7 @@
 import { useCallback, useState, useEffect } from 'react';
 import { ChessPieceTeam, ChessPieceType, ITargetPawn, useStoreContext, promotePawn } from '@/shared';
 
-export function usePawnPromotion() {
+export function usePawnPromotionAi() {
   const [targetPawn, setTargetPawn] = useState<ITargetPawn | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const { gameStore } = useStoreContext();
